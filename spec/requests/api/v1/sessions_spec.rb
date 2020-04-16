@@ -7,11 +7,12 @@ RSpec.describe 'POST /api/v1/auth/sign_in', type: :request do
   let(:expected_response) do
     {
       'data' => {
-        'id' => user.id, 'uid' => user.email, 'email' => user.email,
+        'id' => user.id, 'uid' => user.email, 'email' => user.email, 'nickname' => user.nickname,
         'provider' => 'email', 'allow_password_change' => false
       }
     }
   end
+  
   describe 'with valid credentials' do
     before do
       post '/api/v1/auth/sign_in',
