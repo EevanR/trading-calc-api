@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_16_104659) do
+ActiveRecord::Schema.define(version: 2020_04_16_135033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "trades", force: :cascade do |t|
+    t.string "ticker", null: false
+    t.float "entry"
+    t.integer "shares"
+    t.float "stop"
+    t.string "setup", null: false
+    t.string "date"
+    t.float "profit", null: false
+    t.integer "trade_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
