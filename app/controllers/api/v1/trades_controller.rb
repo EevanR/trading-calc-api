@@ -20,6 +20,25 @@ class Api::V1::TradesController < ApplicationController
   private
 
   def trade_params
-    params.require(:trade).permit(:ticker, :entry, :shares, :stop, :setup, :date, :profit, :trade_id)
+    params.require(:trade).permit(
+      :ticker, 
+      :entry, 
+      :shares, 
+      :stop, 
+      :setup, 
+      :date, 
+      :profit, 
+      :trade_id,
+      :open,
+      :high,
+      :low,
+      :close,
+      :vol,
+      :prevClose,
+      :volAvg,
+      :mktCap,
+      :company,
+      :industry
+    )
   end
 end

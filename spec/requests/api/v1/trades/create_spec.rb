@@ -15,7 +15,17 @@ RSpec.describe 'POST /api/v1/trades', type: :request do
           setup: "Setup 1",
           date: "20/01/01",
           profit: 1000.00,
-          trade_id: 2
+          trade_id: 2,
+          open: "1799.50",
+          high: "1900.00",
+          low: "1798.50",
+          close: "1900.00",
+          vol: "4400009",
+          prevClose: "1600.00",
+          volAvg: 32000,
+          mktCap: 32000000000,
+          company: "Amazon",
+          industry: "Consumer"
         }
       }, 
       headers: headers
