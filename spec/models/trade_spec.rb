@@ -9,7 +9,16 @@ RSpec.describe Trade, type: :model do
     it { is_expected.to have_db_column :setup }
     it { is_expected.to have_db_column :date }
     it { is_expected.to have_db_column :profit }
-    it { is_expected.to have_db_column :trade_id }
+    it { is_expected.to have_db_column :open }
+    it { is_expected.to have_db_column :high }
+    it { is_expected.to have_db_column :low }
+    it { is_expected.to have_db_column :close }
+    it { is_expected.to have_db_column :vol }
+    it { is_expected.to have_db_column :prevClose }
+    it { is_expected.to have_db_column :volAvg }
+    it { is_expected.to have_db_column :mktCap }
+    it { is_expected.to have_db_column :company }
+    it { is_expected.to have_db_column :industry }
   end
 
   it 'should have valid Factory' do
