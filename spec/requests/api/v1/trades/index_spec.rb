@@ -1,14 +1,17 @@
 # frozen_string_literal: true
 
 RSpec.describe 'GET /api/v1/trades', type: :request do
-  let!(:headers) { { HTTP_ACCEPT: 'application/json' } }
+  let(:user) { create(:user) }
+  let(:credentials) { user.create_new_auth_token }
+  let!(:trade1) { create(:trade, user_id: user.id)  }
   let!(:trade) do 
     3.times do
       create(:trade)
     end
   end
+  let!(:headers) { { HTTP_ACCEPT: 'application/json' }.merge!(credentials) }
 
-  describe 'Succesfully indexes all trades' do
+  describe 'Succesfully indexes all users trades' do
     before do
       get '/api/v1/trades',
       headers: headers
@@ -18,8 +21,8 @@ RSpec.describe 'GET /api/v1/trades', type: :request do
       expect(response).to have_http_status 200
     end
 
-    it 'returns 3 trades' do
-      expect(response_json.count).to eq 3
+    it 'returns 1 trade' do
+      expect(response_json.count).to eq 1
     end
   end
 end

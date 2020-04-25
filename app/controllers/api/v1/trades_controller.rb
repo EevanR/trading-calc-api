@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class Api::V1::TradesController < ApplicationController
+  before_action :authenticate_user!
 
   def index
-    comments = Trade.all
-    render json: comments
+    trades = Trade.where(user_id: current_user.id)
+    render json: trades
   end
 
   def create
@@ -38,7 +39,8 @@ class Api::V1::TradesController < ApplicationController
       :volAvg,
       :mktCap,
       :company,
-      :industry
+      :industry,
+      :user_id
     )
   end
 end
