@@ -67,7 +67,7 @@ RSpec.describe 'POST /api/v1/trades', type: :request do
     end
   end
 
-  describe 'Unsuccesfully creates trade entry with missing param' do
+  describe 'Unsuccesfully creates trade entry when not authenticated' do
     before do
       post '/api/v1/trades',
       params: { 

@@ -9,7 +9,7 @@ class Api::V1::TradesController < ApplicationController
   end
 
   def create
-    trade = Trade.create(trade_params)
+    trade = Trade.create(trade_params.merge(user_id: current_user.id))
 
     if trade.persisted?
       render json: trade
@@ -39,8 +39,7 @@ class Api::V1::TradesController < ApplicationController
       :volAvg,
       :mktCap,
       :company,
-      :industry,
-      :user_id
+      :industry
     )
   end
 end
