@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
 class Api::V1::TradesController < ApplicationController
+  before_action :authenticate_user!
 
   def index
-    comments = Trade.all
-    render json: comments
+    trades = Trade.where(user_id: current_user.id)
+    render json: trades
   end
 
   def create
-    trade = Trade.create(trade_params)
+    trade = Trade.create(trade_params.merge(user_id: current_user.id))
 
     if trade.persisted?
       render json: trade

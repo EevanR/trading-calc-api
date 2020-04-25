@@ -19,6 +19,7 @@ RSpec.describe Trade, type: :model do
     it { is_expected.to have_db_column :mktCap }
     it { is_expected.to have_db_column :company }
     it { is_expected.to have_db_column :industry }
+    it { is_expected.to have_db_column :user_id }
   end
 
   it 'should have valid Factory' do
