@@ -4,5 +4,6 @@ FactoryBot.define do
     nickname { "UserMan" }
     password { "password" }
     password_confirmation { "password" }
+    risk { 0.01 }
   end
 end
