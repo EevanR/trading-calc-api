@@ -67,29 +67,4 @@ RSpec.describe 'POST /api/v1/trades', type: :request do
     end
   end
 
-  describe 'Unsuccesfully creates trade entry when not authenticated' do
-    before do
-      post '/api/v1/trades',
-      params: { 
-        trade: {
-          ticker: "EMV",
-          entry: 1800.98,
-          shares: 40,
-          stop: 1800.00,
-          setup: "Setup 1",
-          date: "20/01/01",
-          profit: 1000.00,
-          trade_id: 2
-        }
-      }
-    end
-
-    it 'returns a 401 not authenticated response status' do
-      expect(response).to have_http_status 401
-    end
-
-    it 'returns an error message' do
-      expect(response_json['errors'][0]).to eq "You need to sign in or sign up before continuing."
-    end
-  end
 end
