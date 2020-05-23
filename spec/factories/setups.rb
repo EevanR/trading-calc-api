@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :setup do
+    name { "MyString" }
     reqOne { "MyString" }
     reqTwo { "MyString" }
     reqThree { "MyString" }

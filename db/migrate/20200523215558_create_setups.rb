@@ -1,6 +1,7 @@
 class CreateSetups < ActiveRecord::Migration[6.0]
   def change
     create_table :setups do |t|
+      t.string :name
       t.string :reqOne
       t.string :reqTwo
       t.string :reqThree
