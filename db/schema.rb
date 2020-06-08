@@ -10,10 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_25_110456) do
+ActiveRecord::Schema.define(version: 2020_05_23_215558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "setups", force: :cascade do |t|
+    t.string "name"
+    t.string "reqOne"
+    t.string "reqTwo"
+    t.string "reqThree"
+    t.string "reqFour"
+    t.string "reqFive"
+    t.string "reqSix"
+    t.string "reqSeven"
+    t.string "reqEight"
+    t.string "reqNine"
+    t.string "reqTen"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "trades", force: :cascade do |t|
     t.string "ticker", null: false

@@ -11,6 +11,8 @@ class Api::V1::SetupsController < ApplicationController
   def show
   end
 
+  private 
+  
   def trade_params
     params.require(:setup).permit(:name)
   end

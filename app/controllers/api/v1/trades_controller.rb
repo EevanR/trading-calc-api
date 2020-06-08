@@ -18,6 +18,10 @@ class Api::V1::TradesController < ApplicationController
     end
   end
 
+  def destroy
+    Trade.destroy_all
+  end
+
   private
 
   def trade_params
