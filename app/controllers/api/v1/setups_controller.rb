@@ -14,7 +14,8 @@ class Api::V1::SetupsController < ApplicationController
   end
 
   def index
-    binding.pry
+    setups = Setup.where(user_id: current_user.id)
+    render json: setups
   end
 
   def show
@@ -27,6 +28,6 @@ class Api::V1::SetupsController < ApplicationController
   private 
   
   def setup_params
-    params.require(:setup).permit(:name, :reqOne, :reqTwo, :reqThree, :reqFour, :reqFive, :reqSix, :reqSeven, :reqEight, :reqNine, :reqTen)
+    params.require(:setup).permit(:name, :reqOne, :reqTwo, :reqThree, :reqFour, :reqFive, :reqSix, :reqSeven, :reqEight, :reqNine, :reqTen, :user_id)
   end
 end

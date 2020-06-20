@@ -13,7 +13,8 @@ RSpec.describe 'POST /api/v1/trades', type: :request do
           name: "Short Strategy",
           reqOne: "Prerequisite one",
           reqTwo: "Prerequisite two",
-          reqThree: "You can have up to 10 pre reqs"
+          reqThree: "You can have up to 10 pre reqs",
+          user_id: user.id
         }
       },
       headers: headers
@@ -24,6 +25,7 @@ RSpec.describe 'POST /api/v1/trades', type: :request do
     end
 
     it 'returns the name of strategy' do
+      binding.pry
       expect(response_json['name']).to eq "Short Strategy"
     end
   end

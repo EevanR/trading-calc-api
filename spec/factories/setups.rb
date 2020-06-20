@@ -11,5 +11,6 @@ FactoryBot.define do
     reqEight { "Pre req eight" }
     reqNine { "Pre req nine" }
     reqTen { "Pre req ten" }
+    user_id {1}
   end
 end
