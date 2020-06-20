@@ -11,6 +11,8 @@ class Api::V1::SetupsController < ApplicationController
   end
 
   def destroy
+    setup = Setup.find(params[:id])
+    setup.destroy
   end
 
   def index
