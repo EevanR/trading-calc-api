@@ -14,9 +14,14 @@ class Api::V1::SetupsController < ApplicationController
   end
 
   def index
+    binding.pry
   end
 
   def show
+  end
+
+  def update
+
   end
 
   private 
