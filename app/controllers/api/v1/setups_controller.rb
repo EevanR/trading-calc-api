@@ -12,7 +12,11 @@ class Api::V1::SetupsController < ApplicationController
 
   def destroy
     setup = Setup.find(params[:id])
-    setup.destroy
+    if setup.user_id === current_user.id
+      setup.destroy
+    else
+      render json: { errors: ["You are not authorized for this action."] }, status: 401
+    end
   end
 
   def index
