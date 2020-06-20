@@ -19,10 +19,16 @@ class Api::V1::SetupsController < ApplicationController
   end
 
   def show
+    setup = Setup.find(params[:id])
+    if setup.user_id === current_user.id
+      render json: setup
+    else
+      render json: { errors: ["You may not view this data"]}, status: 401
+    end
   end
 
   def update
-
+ 
   end
 
   private 
