@@ -35,7 +35,6 @@ RSpec.describe 'GET /api/v1/setups/:id', type: :request do
     end
 
     it 'returns New Strat Setup' do
-      binding.pry
       expect(response_json['errors'][0]).to eq "You may not view this data"
     end
   end

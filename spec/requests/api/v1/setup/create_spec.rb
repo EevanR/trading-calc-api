@@ -25,7 +25,6 @@ RSpec.describe 'POST /api/v1/trades', type: :request do
     end
 
     it 'returns the name of strategy' do
-      binding.pry
       expect(response_json['name']).to eq "Short Strategy"
     end
   end
