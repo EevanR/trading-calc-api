@@ -1,15 +1,16 @@
 FactoryBot.define do
   factory :setup do
-    name { "MyString" }
-    reqOne { "MyString" }
-    reqTwo { "MyString" }
-    reqThree { "MyString" }
-    reqFour { "MyString" }
-    reqFive { "MyString" }
-    reqSix { "MyString" }
-    reqSeven { "MyString" }
-    reqEight { "MyString" }
-    reqNine { "MyString" }
-    reqTen { "MyString" }
+    name { "New Strat" }
+    reqOne { "Pre req one" }
+    reqTwo { "Pre req two" }
+    reqThree { "Pre req three" }
+    reqFour { "Pre req four" }
+    reqFive { "Pre req five" }
+    reqSix { "Pre req six" }
+    reqSeven { "Pre req seven" }
+    reqEight { "Pre req eight" }
+    reqNine { "Pre req nine" }
+    reqTen { "Pre req ten" }
+    user_id {1}
   end
 end
