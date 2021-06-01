@@ -11,7 +11,7 @@ RSpec.describe 'GET /api/v1/trades', type: :request do
   end
   let!(:headers) { { HTTP_ACCEPT: 'application/json' }.merge!(credentials) }
 
-  describe 'Succesfully indexes all users trades' do
+  describe 'Succesfully indexes all users Setups' do
     before do
       get '/api/v1/setups',
       headers: headers

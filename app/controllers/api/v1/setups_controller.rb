@@ -2,7 +2,7 @@ class Api::V1::SetupsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    setup = Setup.create(setup_params)
+    setup = Setup.create(setup_params.merge(user_id: current_user.id))
     if setup.persisted?
       render json: setup
     else
