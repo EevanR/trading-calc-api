@@ -14,6 +14,7 @@ class Api::V1::SetupsController < ApplicationController
     setup = Setup.find(params[:id])
     if setup.user_id === current_user.id
       setup.destroy
+      render json: { message: "Setup Deleted" }
     else
       render json: { errors: ["You are not authorized for this action."] }, status: 401
     end

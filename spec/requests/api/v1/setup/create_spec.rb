@@ -25,6 +25,7 @@ RSpec.describe 'POST /api/v1/trades', type: :request do
     end
 
     it 'returns the name of strategy' do
+      binding.pry
       expect(response_json['name']).to eq "Short Strategy"
     end
   end
@@ -47,6 +48,7 @@ RSpec.describe 'POST /api/v1/trades', type: :request do
     end
 
     it 'returns an error message' do
+      binding.pry
       expect(response_json['errors'][0]).to eq "Name can't be blank"
     end
   end

@@ -22,6 +22,7 @@ RSpec.describe 'GET /api/v1/trades', type: :request do
     end
 
     it 'returns 1 setup' do
+      binding.pry
       expect(response_json.count).to eq 1
     end
   end

@@ -14,8 +14,9 @@ RSpec.describe 'DELETE /api/v1/setups/:id', type: :request do
       headers: headers
     end
     
-    it 'returns a 204 response status' do
-      expect(response).to have_http_status 204
+    it 'returns a 200 response status' do
+      binding.pry
+      expect(response).to have_http_status 200
     end
 
     it "setup count should equal 1" do
