@@ -15,7 +15,6 @@ RSpec.describe 'DELETE /api/v1/setups/:id', type: :request do
     end
     
     it 'returns a 200 response status' do
-      binding.pry
       expect(response).to have_http_status 200
     end
 
