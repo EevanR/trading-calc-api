@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_20_140315) do
+ActiveRecord::Schema.define(version: 2021_07_21_180935) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "setups", force: :cascade do |t|
     t.string "name"
-    t.string "reqOne"
-    t.string "reqTwo"
-    t.string "reqThree"
-    t.string "reqFour"
+    t.string "req1"
+    t.string "req2"
+    t.string "req3"
+    t.string "req4"
     t.string "reqFive"
     t.string "reqSix"
     t.string "reqSeven"
