@@ -6,7 +6,7 @@ RSpec.describe 'PUT /api/v1/setups', type: :request do
 
   describe 'Successfully edits setup details' do
     before do
-      put "/api/v1/setups/#{setup.id}",
+      patch "/api/v1/setups/#{setup.id}",
       params: {
           reqOne: "This requirement has changed"
       },
@@ -14,6 +14,7 @@ RSpec.describe 'PUT /api/v1/setups', type: :request do
     end
     
     it 'returns a 200 response status' do
+      binding.pry
       expect(response).to have_http_status 200
     end
 

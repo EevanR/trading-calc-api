@@ -38,7 +38,7 @@ class Api::V1::SetupsController < ApplicationController
     setup = Setup.find(params[:id])
     setup.update(update_params)
     if setup.persisted? 
-      render json: setup, status: 200
+      render json: setup
     else
       render json: { error: setup.errors.full_messages }, status: 422
     end
@@ -51,6 +51,6 @@ class Api::V1::SetupsController < ApplicationController
   end
 
   def update_params
-    params.permit(:name, :reqOne, :reqTwo, :reqThree, :reqFour, :reqFive, :reqSix, :reqSeven, :reqEight, :reqNine, :reqTen)
+    params.permit(:name, :reqOne, :reqTwo, :reqThree, :reqFour, :reqFive, :reqSix, :reqSeven, :reqEight, :reqNine, :reqTen, :id)
   end
 end
