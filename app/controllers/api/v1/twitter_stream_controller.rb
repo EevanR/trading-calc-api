@@ -36,7 +36,7 @@ class TwitterStreamController < ApplicationController
       }
     }
 
-    @response = Typhoeus.get(@rules_url, @options)
+    @response = RestClient.get(@rules_url, @options)
 
     raise "An error occurred while retrieving active rules from your stream: #{@response.body}" unless @response.success?
 
@@ -60,7 +60,7 @@ class TwitterStreamController < ApplicationController
       body: JSON.dump(@payload)
     }
 
-    @response = Typhoeus.post(@rules_url, @options)
+    @response = RestClient.post(@rules_url, @options)
     raise "An error occurred while adding rules: #{@response.status_message}" unless @response.success?
   end
 
@@ -84,7 +84,7 @@ class TwitterStreamController < ApplicationController
       body: JSON.dump(@payload)
     }
 
-    @response = Typhoeus.post(@rules_url, @options)
+    @response = RestClient.post(@rules_url, @options)
 
     raise "An error occurred while deleting your rules: #{@response.status_message}" unless @response.success?
   end
@@ -120,7 +120,7 @@ class TwitterStreamController < ApplicationController
       params: params
     }
 
-    @request = Typhoeus::Request.new(@stream_url, @options)
+    @request = RestClient::Request.new(@stream_url, @options)
     @request.on_body do |chunk|
       puts chunk
     end
