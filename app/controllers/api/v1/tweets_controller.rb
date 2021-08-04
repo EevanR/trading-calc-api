@@ -20,6 +20,13 @@ class Api::V1::TweetsController < ApplicationController
   end
 
   def destroy
+    tweet = Tweet.find(params[:id])
+    if tweet.user_id === current_user.id
+      tweet.destroy
+      render json: { message: "Tweet deleted" }
+    else
+      render json: { errors: ["You are not authorized for this action."] }, status: 401
+    end
   end
 
   private
