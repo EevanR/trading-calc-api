@@ -57,7 +57,6 @@ RSpec.describe 'POST /api/v1/auth', type: :request do
       end
 
       it 'returns a 422 response status' do
-        binding.pry
         expect(response).to have_http_status 422
       end
 

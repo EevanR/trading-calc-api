@@ -10,23 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_20_140315) do
+ActiveRecord::Schema.define(version: 2021_08_04_105449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "setups", force: :cascade do |t|
     t.string "name"
-    t.string "reqOne"
-    t.string "reqTwo"
-    t.string "reqThree"
-    t.string "reqFour"
-    t.string "reqFive"
-    t.string "reqSix"
-    t.string "reqSeven"
-    t.string "reqEight"
-    t.string "reqNine"
-    t.string "reqTen"
+    t.string "req1"
+    t.string "req2"
+    t.string "req3"
+    t.string "req4"
+    t.string "req5"
+    t.string "req6"
+    t.string "req7"
+    t.string "req8"
+    t.string "req9"
+    t.string "req10"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
@@ -54,6 +54,13 @@ ActiveRecord::Schema.define(version: 2020_06_20_140315) do
     t.string "company"
     t.string "industry"
     t.integer "user_id"
+  end
+
+  create_table "tweets", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
