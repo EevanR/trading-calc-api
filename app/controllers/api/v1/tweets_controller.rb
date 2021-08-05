@@ -10,6 +10,12 @@ class Api::V1::TweetsController < ApplicationController
     end
   end
 
+  def index
+    twitterHandles = Tweet.where(user_id: current_user.id)
+    render json: twitterHandles
+  end
+
+
   def show
     tweet = Tweet.find(params[:id])
     if tweet.user_id === current_user.id
