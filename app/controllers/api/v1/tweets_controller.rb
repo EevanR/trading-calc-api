@@ -2,26 +2,15 @@ class Api::V1::TweetsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    savedHandles = Tweet.all
-    if savedHandles === []
+    saved = Tweet.find_by(name: tweet_params["name"])
+    if saved != nil
+      render json: saved, status: 422
+    else
       tweeter = Tweet.create(tweet_params.merge(user_id: current_user.id))
       if tweeter.persisted? 
         render json: tweeter
       else
         render json: { errors: tweeter.errors.full_messages }, status: 422
-      end
-    else
-      savedHandles.each do |handle|
-        if handle.name === tweet_params['name'] 
-          render json: handle 
-        else
-          tweeter = Tweet.create(tweet_params.merge(user_id: current_user.id))
-          if tweeter.persisted? 
-            render json: tweeter
-          else
-            render json: { errors: tweeter.errors.full_messages }, status: 422
-          end
-        end
       end
     end
   end

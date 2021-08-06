@@ -84,8 +84,8 @@ RSpec.describe 'POST /api/v1/tweets', type: :request do
       headers: headers
     end
 
-    it 'returns 200 response status' do
-      expect(response).to have_http_status 200
+    it 'returns 422 response status' do
+      expect(response).to have_http_status 422
     end
 
     it 'create action doesn not persist, tweet count remains 1' do
