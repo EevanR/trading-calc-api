@@ -25,7 +25,7 @@ RSpec.describe 'GET /api/v1/tweets', type: :request do
       expect(response_json.count).to eq 3
     end
 
-    it 'returns correct JSON matching correct user' do
+    it 'returns correct entry matching correct user' do
       expect(response_json[0]["user_id"]).to eq user.id
     end
   end

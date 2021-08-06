@@ -72,7 +72,7 @@ RSpec.describe 'POST /api/v1/tweets', type: :request do
     end
   end
 
-  describe 'will not create duplicate entries' do
+  describe 'will not create duplicate entries per user' do
     let!(:tweet) { create(:tweet, user_id: user.id)  }
     before do
       post '/api/v1/tweets',
