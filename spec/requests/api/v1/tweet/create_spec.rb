@@ -71,4 +71,25 @@ RSpec.describe 'POST /api/v1/tweets', type: :request do
       expect(Tweet.all).to be_empty
     end
   end
+
+  describe 'will not create duplicate entries per user' do
+    let!(:tweet) { create(:tweet, user_id: user.id)  }
+    before do
+      post '/api/v1/tweets',
+      params: {
+        tweet: {
+          name: "team3dstocks"
+        }
+      },
+      headers: headers
+    end
+
+    it 'returns 422 response status' do
+      expect(response).to have_http_status 422
+    end
+
+    it 'create action doesn not persist, tweet count remains 1' do
+      expect(Tweet.count).to eq 1
+    end
+  end
 end
