@@ -11,9 +11,9 @@ RSpec.describe 'POST /api/v1/trades', type: :request do
       params: {
         setup: {
           name: "Short Strategy",
-          reqOne: "Prerequisite one",
-          reqTwo: "Prerequisite two",
-          reqThree: "You can have up to 10 pre reqs",
+          req1: "Prerequisite one",
+          req2: "Prerequisite two",
+          req3: "You can have up to 10 pre reqs",
           user_id: user.id
         }
       },
@@ -34,9 +34,9 @@ RSpec.describe 'POST /api/v1/trades', type: :request do
       post '/api/v1/setups',
       params: {
         setup: {
-          reqOne: "Prerequisite one",
-          reqTwo: "Prerequisite two",
-          reqThree: "You can have up to 10 pre reqs"
+          req1: "Prerequisite one",
+          req2: "Prerequisite two",
+          req3: "You can have up to 10 pre reqs"
         }
       },
       headers: headers
@@ -57,9 +57,9 @@ RSpec.describe 'POST /api/v1/trades', type: :request do
       params: {
         setup: {
           name: "Short Strategy",
-          reqOne: "Prerequisite one",
-          reqTwo: "Prerequisite two",
-          reqThree: "You can have up to 10 pre reqs"
+          req1: "Prerequisite one",
+          req2: "Prerequisite two",
+          req3: "You can have up to 10 pre reqs"
         }
       }
     end

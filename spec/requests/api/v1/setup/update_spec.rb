@@ -8,7 +8,7 @@ RSpec.describe 'PUT /api/v1/setups', type: :request do
     before do
       patch "/api/v1/setups/#{setup.id}",
       params: {
-          reqOne: "This requirement has changed"
+          req1: "This requirement has changed"
       },
       headers: headers
     end
@@ -18,7 +18,7 @@ RSpec.describe 'PUT /api/v1/setups', type: :request do
     end
 
     it "returns a updated first requirement" do
-      expect(response_json['reqOne']).to eq "This requirement has changed"
+      expect(response_json['req1']).to eq "This requirement has changed"
     end
   end
 end
