@@ -4,7 +4,7 @@ class Api::V1::TweetsController < ApplicationController
   def create
     saved = Tweet.find_by(name: tweet_params["name"])
     if saved != nil
-      render json: saved, status: 422
+      render json: saved, status: 200
     else
       tweeter = Tweet.create(tweet_params.merge(user_id: current_user.id))
       if tweeter.persisted? 
