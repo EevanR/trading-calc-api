@@ -10,32 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_20_111547) do
+ActiveRecord::Schema.define(version: 2021_08_21_090821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "excels", force: :cascade do |t|
     t.string "user_id"
-    t.float "Comm"
-    t.string "Currency"
-    t.float "ECNAdd"
-    t.float "ECNRemove"
-    t.float "ExecTime"
-    t.float "GrossProceeds"
-    t.string "Liq"
-    t.float "NSCC"
-    t.float "Nasdaq"
-    t.float "NetProceeds"
-    t.float "Price"
-    t.integer "Qty"
-    t.string "SD"
-    t.float "SEC"
-    t.string "Side"
-    t.string "Symbol"
-    t.string "TD"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "data", default: [], array: true
   end
 
   create_table "setups", force: :cascade do |t|

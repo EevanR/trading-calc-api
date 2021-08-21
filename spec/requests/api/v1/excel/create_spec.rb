@@ -10,24 +10,11 @@ RSpec.describe 'POST /api/v1/excels', type: :request do
       post '/api/v1/excels',
       params: {
         excel: {
-          user_id: "1",
-          Comm: 0.99,
-          Currency: "USD",
-          ECNAdd: 0,
-          ECNRemove: 0,
-          ExecTime: 0.412,
-          GrossProceeds: 100,
-          Liq: "n",
-          NSCC: 0.0003,
-          Nasdaq: 0.033,
-          NetProceeds: 90,
-          Price: 10.00,
-          Qty: 100,
-          SD: "01/03/21",
-          SEC: 0.0923,
-          Side: "BC",
-          Symbol: "AAPL",
-          TD: "01/01/21"
+          user_id: "15",
+          data: [
+            [-18.879999999999995, 0, 0.4212152777777778, "08/03/2021", "/"],
+            [-20, 0, 0.4212152777777778, "08/03/2021", "/"]
+          ]
         }
       },
       headers: headers
@@ -38,7 +25,7 @@ RSpec.describe 'POST /api/v1/excels', type: :request do
     end
 
     it 'returns the name of strategy' do
-      expect(response_json['user_id']).to eq "1"
+      expect(response_json['user_id']).to eq "15"
     end
   end
 

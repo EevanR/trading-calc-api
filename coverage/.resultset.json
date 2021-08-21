@@ -51,6 +51,7 @@
         1,
         2,
         null,
+        null,
         null
       ],
       "/Users/tiffanyhutton/Craft_Projects/trading-calc-api/app/models/excel.rb": [
@@ -300,6 +301,6 @@
         0
       ]
     },
-    "timestamp": 1629468280
+    "timestamp": 1629537413
   }
 }

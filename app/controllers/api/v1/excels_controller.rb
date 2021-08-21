@@ -2,7 +2,7 @@ class Api::V1::ExcelsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    entry = Excel.create(excel_params)
+    entry = Excel.create(excels_params)
     if entry.persisted?
       render json: entry
     else
@@ -18,7 +18,8 @@ class Api::V1::ExcelsController < ApplicationController
 
   private
 
-  def excel_params
-    params.require(:excel).permit(:user_id, :Comm, :Currency, :ECNAdd, :ECNRemove, :ExecTime, :GrossProceeds, :Liq, :NSCC, :Nasdaq, :NetProceeds, :Price, :Qty, :Side, :Symbol, :TD, :SD, :SEC)
+  def excels_params
+    params.require(:excel).permit(:user_id, data: [])
   end
+
 end
