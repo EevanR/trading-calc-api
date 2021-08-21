@@ -14,6 +14,10 @@ RSpec.describe 'POST /api/v1/excels', type: :request do
           data: [
             [-18.879999999999995, 0, 0.4212152777777778, "08/03/2021", "/"],
             [-20, 0, 0.4212152777777778, "08/03/2021", "/"]
+          ],
+          grossData: [
+            [-18.879999999999995, 0, 0.4212152777777778, "08/03/2021", "/"],
+            [-20, 0, 0.4212152777777778, "08/03/2021", "/"]
           ]
         }
       },
@@ -24,8 +28,8 @@ RSpec.describe 'POST /api/v1/excels', type: :request do
       expect(response).to have_http_status 200
     end
 
-    it 'returns the name of strategy' do
-      expect(response_json['user_id']).to eq "15"
+    it 'returns value from grossData array' do
+      expect(response_json["grossData"][0]).to eq "-18.879999999999995"
     end
   end
 

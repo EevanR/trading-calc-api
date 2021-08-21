@@ -19,7 +19,7 @@ class Api::V1::ExcelsController < ApplicationController
   private
 
   def excels_params
-    params.require(:excel).permit(:user_id, data: [])
+    params.require(:excel).permit(:user_id, data: [], grossData: [])
   end
 
 end
