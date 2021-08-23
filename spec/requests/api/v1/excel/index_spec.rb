@@ -19,7 +19,21 @@ RSpec.describe 'GET /api/v1/excels', type: :request do
     end
 
     it "setup count should equal 1" do
-      expect(response_json).count eq 3
+      expect(response_json.count).to eq 3
+    end
+  end
+
+  describe 'unsuccessfully index unauthorized excel entries' do
+    before do
+      get '/api/v1/excels'
+    end
+    
+    it 'returns a 200 response status' do
+      expect(response).to have_http_status 401
+    end
+
+    it "setup count should equal 1" do
+      expect(response_json["errors"][0]).to eq "You need to sign in or sign up before continuing."
     end
   end
 end
