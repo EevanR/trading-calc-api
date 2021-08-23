@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_04_105449) do
+ActiveRecord::Schema.define(version: 2021_08_23_083214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "excels", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "netData", default: [], array: true
+    t.text "grossData", default: [], array: true
+  end
 
   create_table "setups", force: :cascade do |t|
     t.string "name"
