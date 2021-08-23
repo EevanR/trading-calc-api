@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-RSpec.describe 'POST /api/v1/excels', type: :request do
+RSpec.describe 'GET /api/v1/excels/:id', type: :request do
   let(:user) { create(:user) }
   let(:credentials) { user.create_new_auth_token }
   let!(:headers) { { HTTP_ACCEPT: 'application/json' }.merge!(credentials) }
 
-  describe 'Succesfully creates trade from excel data' do
+  describe 'Succesfully show entry from excel data' do
     before do
-      post '/api/v1/excels',
+      post `/api/v1/excels/#{id}`,
       params: {
         excel: {
           user_id: "15",

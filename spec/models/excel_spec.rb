@@ -1,5 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Excel, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'Database table' do
+    it { is_expected.to have_db_column :user_id }
+    it { is_expected.to have_db_column :data}
+    it { is_expected.to have_db_column :grossData}
+  end
+
+  it 'should have valid Factory' do
+    expect(create(:excel)).to be_valid
+  end
 end

@@ -10,7 +10,7 @@ class Api::V1::ExcelsController < ApplicationController
     end
   end
 
-  def index
+  def show
   end
 
   def destroy
