@@ -20,6 +20,13 @@ class Api::V1::ExcelsController < ApplicationController
   end
 
   def destroy
+    entry = Excel.find(params[:id])
+    if entry.user_id === current_user.id
+      entry.destroy
+      render json: { message: "Entry Deleted" }
+    else
+      render json: { errors: ["You are not authorized for this action."] }, status: 401
+    end
   end
 
   private
