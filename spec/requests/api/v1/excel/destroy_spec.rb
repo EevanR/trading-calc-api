@@ -23,18 +23,19 @@ RSpec.describe 'DELETE /api/v1/excels/:id', type: :request do
     end
   end
 
-  # describe 'Unsuccessfully delete setup as non authorized user' do
-  #   before do
-  #     delete "/api/v1/setups/#{setup.id}",
-  #     headers: headers2
-  #   end
+  describe 'Unsuccessfully delete setup as non authorized user' do
+    before do
+      delete "/api/v1/excels/#{excel.id}",
+      headers: headers2
+    end
     
-  #   it 'returns a 401 response status' do
-  #     expect(response).to have_http_status 401
-  #   end
+    it 'returns a 401 response status' do
+      expect(response).to have_http_status 401
+    end
 
-  #   it "setup count should equal 2" do
-  #     expect(Setup.count).to eq 2
-  #   end
-  # end
+    it "excel count should equal 2" do
+      expect(response_json["errors"][0]).to eq "You are not authorized for this action."
+      expect(Excel.count).to eq 2
+    end
+  end
 end
