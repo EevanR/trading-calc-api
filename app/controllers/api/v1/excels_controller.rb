@@ -11,6 +11,12 @@ class Api::V1::ExcelsController < ApplicationController
   end
 
   def show
+    entry = Excel.find(params[:id])
+    if entry.user_id === current_user.id
+      render json: entry
+    else
+      render json: { errors: ["You may not view this data"]}, status: 401
+    end
   end
 
   def destroy
@@ -19,7 +25,7 @@ class Api::V1::ExcelsController < ApplicationController
   private
 
   def excels_params
-    params.require(:excel).permit(:user_id, data: [], grossData: [])
+    params.require(:excel).permit(:user_id, netData: [], grossData: [])
   end
 
 end
