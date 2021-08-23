@@ -18,7 +18,6 @@ RSpec.describe 'GET /api/v1/tweets', type: :request do
     end
 
     it "returns a success response status" do
-      binding.pry
       expect(response).to have_http_status(:success)
     end
 
