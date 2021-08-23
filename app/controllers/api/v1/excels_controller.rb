@@ -20,8 +20,9 @@ class Api::V1::ExcelsController < ApplicationController
   end
 
   def destroy
+    binding.pry
     entry = Excel.find(params[:id])
-    if entry.user_id === current_user.id
+    if entry.user_id === current_user.id 
       entry.destroy
       render json: { message: "Entry Deleted" }
     else
