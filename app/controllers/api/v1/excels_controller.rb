@@ -2,7 +2,6 @@ class Api::V1::ExcelsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    binding.pry
     entry = Excel.create(excels_params.merge(user_id: current_user.id))
     if entry.persisted?
       render json: entry
