@@ -2,7 +2,8 @@ class Api::V1::ExcelsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    entry = Excel.create(excels_params)
+    binding.pry
+    entry = Excel.create(excels_params.merge(user_id: current_user.id))
     if entry.persisted?
       render json: entry
     else
@@ -37,7 +38,7 @@ class Api::V1::ExcelsController < ApplicationController
   private
 
   def excels_params
-    params.require(:excel).permit(:user_id, netData: [], grossData: [])
+    params.require(:excel).permit(:user_id, data: [:Ticker, :NetProfit, :GrossProfit, :ShareCount, :TimeStamp, :Date, :Commissions])
   end
 
 end
