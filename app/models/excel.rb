@@ -1,3 +1,3 @@
 class Excel < ApplicationRecord
-  validates_presence_of :data, :user_id
+  validates_presence_of :user_id
 end
