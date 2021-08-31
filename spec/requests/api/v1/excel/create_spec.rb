@@ -46,4 +46,24 @@ RSpec.describe 'POST /api/v1/excels', type: :request do
       expect(response).to have_http_status 401
     end
   end
+
+  describe 'succesfully creates trade with only fees data' do
+    before do
+      post '/api/v1/excels',
+      params: {
+        excel: {
+          fees: 23.32
+        }
+      },
+      headers: headers
+    end
+
+    it 'returns a 200 response status' do
+      expect(response).to have_http_status 200
+    end
+
+    it 'returns a 200 response status' do
+      expect(response_json["fees"]).to eq 23.32
+    end
+  end
 end
