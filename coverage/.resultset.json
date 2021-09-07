@@ -27,32 +27,9 @@
         null,
         null
       ],
-      "/Users/tiffanyhutton/Craft_Projects/trading-calc-api/app/controllers/api/v1/excels_controller.rb": [
+      "/Users/tiffanyhutton/Craft_Projects/trading-calc-api/app/controllers/api/v1/admin/users_controller.rb": [
         1,
         1,
-        null,
-        1,
-        4,
-        4,
-        4,
-        null,
-        0,
-        null,
-        null,
-        null,
-        1,
-        0,
-        0,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        null,
-        0,
-        null,
-        null,
         null,
         1,
         0,
@@ -65,35 +42,16 @@
         null,
         null,
         1,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        null,
+        2,
+        2,
         null,
         null,
         1,
-        null,
-        1,
-        4,
-        null,
         null,
         1,
         0,
         null,
         null,
-        null
-      ],
-      "/Users/tiffanyhutton/Craft_Projects/trading-calc-api/app/models/excel.rb": [
-        1,
-        1,
-        null
-      ],
-      "/Users/tiffanyhutton/Craft_Projects/trading-calc-api/app/models/application_record.rb": [
-        1,
-        1,
         null
       ],
       "/Users/tiffanyhutton/Craft_Projects/trading-calc-api/app/mailers/application_mailer.rb": [
@@ -112,7 +70,17 @@
         0,
         0
       ],
+      "/Users/tiffanyhutton/Craft_Projects/trading-calc-api/app/models/excel.rb": [
+        0,
+        0,
+        0
+      ],
       "/Users/tiffanyhutton/Craft_Projects/trading-calc-api/app/models/trade.rb": [
+        0,
+        0,
+        0
+      ],
+      "/Users/tiffanyhutton/Craft_Projects/trading-calc-api/app/models/application_record.rb": [
         0,
         0,
         0
@@ -177,7 +145,16 @@
         0,
         0
       ],
-      "/Users/tiffanyhutton/Craft_Projects/trading-calc-api/app/controllers/api/v1/admin/users_controller.rb": [
+      "/Users/tiffanyhutton/Craft_Projects/trading-calc-api/app/controllers/api/v1/excels_controller.rb": [
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
         0,
         0,
         null,
@@ -191,6 +168,39 @@
         0,
         0,
         null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        null,
+        0,
+        0,
         0,
         null,
         0,
@@ -334,6 +344,6 @@
         0
       ]
     },
-    "timestamp": 1630392148
+    "timestamp": 1630948985
   }
 }
