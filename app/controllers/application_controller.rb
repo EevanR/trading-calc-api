@@ -1,7 +1,12 @@
 class ApplicationController < ActionController::API
         include DeviseTokenAuth::Concerns::SetUserByToken
+        rescue_from ActiveRecord::RecordNotUnique, :with => :error_render_method
 
   before_action :configure_permitted_parameters, if: :devise_controller?
+
+  def error_render_method
+    render json: { errors: {full_messages: ["Please choose another Username"]}}, status: 401
+  end
 
   protected
 
