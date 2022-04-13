@@ -86,5 +86,28 @@ RSpec.describe 'POST /api/v1/auth', type: :request do
         expect(response_json['errors']['email']).to eq ['has already been taken']
       end
     end
+
+    describe 'an already registered Username' do
+      let!(:registered_user) { create(:user, nickname: 'Demo') }
+
+      before do
+        post '/api/v1/auth',
+            params: {
+              email: 'coach@craftacademy.se',
+              password: 'password',
+              password_confirmation: 'password',
+              nickname: 'Demo'
+            },
+            headers: headers
+      end
+
+      it 'returns a 401 response status' do
+        expect(response).to have_http_status 401
+      end
+
+      it 'returns an error message' do
+        expect(response_json['errors']['full_messages']).to eq ['Please choose another Username']
+      end
+    end
   end
 end
