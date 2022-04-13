@@ -18,8 +18,8 @@ RSpec.describe 'GET /api/v1/excels/:id', type: :request do
       expect(response).to have_http_status 200
     end
 
-    it 'returns value from grossData array' do
-      expect(response_json["netData"][0][0])
+    it 'returns value from data array' do
+      expect(response_json['data'][0]['Ticker']).to eq 'AMC'
     end
   end
 
