@@ -1,8 +1,5 @@
 source 'https://rubygems.org'
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
-end
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
@@ -13,6 +10,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rack-cors', require: 'rack/cors'
 gem 'devise_token_auth'
 gem 'rest-client'
+gem "pundit", "~> 2.2"
 
 group :development, :test do
   gem 'pry-rails'
