@@ -6,6 +6,6 @@ class ExcelPolicy < ApplicationPolicy
   end
 
   def show?
-    @user.subscribed?
+    @user.subscriber?
   end
 end
