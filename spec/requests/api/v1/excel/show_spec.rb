@@ -18,6 +18,7 @@ RSpec.describe 'GET /api/v1/excels/:id', type: :request do
     end
 
     it 'returns value from data array' do
+      binding.pry
       expect(response_json['data'][0]['Ticker']).to eq 'AMC'
     end
   end
