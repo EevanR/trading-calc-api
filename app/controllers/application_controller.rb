@@ -7,7 +7,7 @@ class ApplicationController < ActionController::API
   rescue_from Pundit::NotAuthorizedError, with: :not_authorized
 
   def not_authorized 
-    render json: { error: 'errors.not_authorized' }, status: 404
+    render json: { errors: 'Not Authorized' }, status: 403
   end 
   
 
