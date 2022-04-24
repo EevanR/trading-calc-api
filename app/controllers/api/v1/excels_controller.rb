@@ -22,8 +22,8 @@ class Api::V1::ExcelsController < ApplicationController
 
   def show
     entry = Excel.find(params[:id])
-    authorize(entry)
     if entry.user_id === current_user.id
+      entry.data = entry.data.slice(0,10)
       render json: entry
     else
       render json: { errors: ["You may not view this data"]}, status: 401

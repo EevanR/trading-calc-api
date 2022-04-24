@@ -21,5 +21,4 @@ class Api::V1::Admin::UsersController < ApplicationController
   def update_params
     params.permit(:risk)
   end
-
 end
