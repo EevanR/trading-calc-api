@@ -37,6 +37,21 @@ RSpec.describe 'GET /api/v1/excels/:id', type: :request do
     end
   end
 
+  describe 'Show error message when not subscriber' do
+    before do
+      get "/api/v1/admin/excels/#{excel.id}",
+      headers: headers
+    end
+
+    it 'returns a 403 response status' do
+      expect(response).to have_http_status 403
+    end
+
+    it 'returns not authorized error' do
+      expect(response_json["errors"]).to "Not Authorized"
+    end
+  end
+
   describe 'unsuccessfully show entry when unauthorized' do
     before do
       get "/api/v1/excels/#{excel2.id}",
