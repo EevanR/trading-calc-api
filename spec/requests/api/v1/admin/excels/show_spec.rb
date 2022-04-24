@@ -4,8 +4,11 @@ RSpec.describe 'GET /api/v1/excels/:id', type: :request do
   let(:user) { create(:user) }
   let(:credentials) { user.create_new_auth_token }
   let(:headers) { { HTTP_ACCEPT: 'application/json' }.merge!(credentials) }
+  let(:user2) { create(:user, email: "user2@mail.com", nickname: "Userman2", role: "user") }
+  let(:credentials2) { user2.create_new_auth_token }
+  let(:headers2) { { HTTP_ACCEPT: 'application/json' }.merge!(credentials2) }
   let(:excel) { create(:excel, user_id: user.id) }
-  let(:excel2) { create(:excel) }
+  let(:excel2) { create(:excel, user_id:user2.id ) }
 
   describe 'Successfully show entry from excel data' do
     before do
@@ -39,8 +42,8 @@ RSpec.describe 'GET /api/v1/excels/:id', type: :request do
 
   describe 'Show error message when not subscriber' do
     before do
-      get "/api/v1/admin/excels/#{excel.id}",
-      headers: headers
+      get "/api/v1/admin/excels/#{excel2.id}",
+      headers: headers2
     end
 
     it 'returns a 403 response status' do
@@ -48,7 +51,7 @@ RSpec.describe 'GET /api/v1/excels/:id', type: :request do
     end
 
     it 'returns not authorized error' do
-      expect(response_json["errors"]).to "Not Authorized"
+      expect(response_json["errors"]).to eq "Not Authorized"
     end
   end
 
