@@ -36,7 +36,6 @@ RSpec.describe 'GET /api/v1/excels/:id', type: :request do
     end
 
     it 'returns not authorized error' do
-      binding.pry
       expect(response_json["data"].count).to eq 10
     end
   end
