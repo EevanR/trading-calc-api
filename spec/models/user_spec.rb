@@ -11,6 +11,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_db_column :tokens }
     it { is_expected.to have_db_column :nickname }
     it { is_expected.to have_db_column :risk }
+    it { is_expected.to have_db_column :role }
   end
 
   describe 'Validations' do
