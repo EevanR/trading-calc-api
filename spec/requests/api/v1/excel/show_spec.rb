@@ -20,7 +20,7 @@ RSpec.describe 'GET /api/v1/excels/:id', type: :request do
       expect(response).to have_http_status 200
     end
 
-    it 'returns value from data array' do
+    it "returns Ticker name 'AMC'" do
       expect(response_json['data'][0]['Ticker']).to eq 'AMC'
     end
   end
@@ -35,7 +35,7 @@ RSpec.describe 'GET /api/v1/excels/:id', type: :request do
       expect(response).to have_http_status 200
     end
 
-    it 'returns not authorized error' do
+    it 'returns first ten data entries' do
       expect(response_json["data"].count).to eq 10
     end
   end
@@ -50,7 +50,7 @@ RSpec.describe 'GET /api/v1/excels/:id', type: :request do
       expect(response).to have_http_status 401
     end
 
-    it 'returns value from grossData array' do
+    it "returns errors message 'You may not view this data'" do
       expect(response_json["errors"][0]).to eq "You may not view this data"
     end
   end
