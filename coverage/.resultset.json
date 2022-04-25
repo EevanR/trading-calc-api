@@ -15,6 +15,32 @@
         null,
         null
       ],
+      "/Users/tiffanyhutton/Craft_Projects/trading-calc-api/app/controllers/application_controller.rb": [
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null,
+        1,
+        2,
+        null,
+        null,
+        1,
+        null,
+        1,
+        11,
+        11,
+        null,
+        null
+      ],
       "/Users/tiffanyhutton/Craft_Projects/trading-calc-api/app/mailers/application_mailer.rb": [
         0,
         0,
@@ -117,32 +143,6 @@
         null,
         null,
         null,
-        0
-      ],
-      "/Users/tiffanyhutton/Craft_Projects/trading-calc-api/app/controllers/application_controller.rb": [
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
-        null,
-        null,
-        0,
-        0,
-        0,
-        null,
-        0,
-        null,
-        0,
-        0,
-        0,
-        0,
         0
       ],
       "/Users/tiffanyhutton/Craft_Projects/trading-calc-api/app/controllers/api/v1/trades_controller.rb": [
@@ -437,6 +437,6 @@
         0
       ]
     },
-    "timestamp": 1650857235
+    "timestamp": 1650857918
   }
 }
