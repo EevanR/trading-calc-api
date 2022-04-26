@@ -15,8 +15,6 @@ RSpec.describe 'GET /api/v1/admin/excels', type: :request do
     end
 
     it "setup count should equal 1" do
-      binding.pry
-
       expect(response_json.count).to eq 1
     end
   end
