@@ -36,4 +36,34 @@ RSpec.describe 'GET /api/v1/admin/excels', type: :request do
       expect(response_json["errors"][0]).to eq "You need to sign in or sign up before continuing."
     end
   end
+
+  describe 'Show full entry when subscriber' do
+    before do
+      get "/api/v1/admin/excels",
+      headers: headers
+    end
+
+    it 'returns full Excel data set' do
+      expect(response_json["data"].count).to eq 12
+    end
+  end
+
+  describe 'Show error message when not subscriber' do
+    let(:user2) { create(:user, email: "user2@mail.com", nickname: "Userman2", role: "user") }
+    let(:credentials2) { user2.create_new_auth_token }
+    let!(:headers2) { { HTTP_ACCEPT: 'application/json' }.merge!(credentials2) }
+    let(:excel2) { create(:excel, user_id:user2.id ) }
+    before do
+      get "/api/v1/admin/excels",
+      headers: headers2
+    end
+
+    it 'returns a 403 response status' do
+      expect(response).to have_http_status 403
+    end
+
+    it 'returns not authorized error' do
+      expect(response_json["errors"]).to eq "Not Authorized"
+    end
+  end
 end
