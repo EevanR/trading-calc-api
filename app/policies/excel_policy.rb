@@ -5,7 +5,7 @@ class ExcelPolicy < ApplicationPolicy
     end
   end
 
-  def show?
+  def index?
     @user.subscriber?
   end
 end
