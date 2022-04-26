@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       resources :trades, only: [:create, :index, :destroy]
       resources :setups, only: [:create, :index, :show, :destroy, :update]
       resources :tweets, only: [:create, :index, :show, :destroy, :update]
-      resources :excels, only: [:create, :show, :index, :destroy, :update]
+      resources :excels, only: [:create, :index, :destroy, :update]
       namespace :admin, defaults: { format: :json } do
         resources :users, only: [:update, :show]
         resources :excels, only: [:index]

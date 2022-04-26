@@ -21,16 +21,6 @@ class Api::V1::ExcelsController < ApplicationController
     end
   end
 
-  def show
-    entry = Excel.find(params[:id])
-    if entry.user_id === current_user.id
-      entry.data = entry.data.slice(0,10)
-      render json: entry
-    else
-      render json: { errors: ["You may not view this data"]}, status: 401
-    end
-  end
-
   def destroy
     entry = Excel.find(params[:id])
     if entry.user_id === current_user.id
