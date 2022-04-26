@@ -33,7 +33,7 @@ RSpec.describe 'GET /api/v1/excels', type: :request do
     end
   end
 
-  describe 'shows limited data when not subscriber' do
+  describe 'shows limited data when not subscriber, most recent 10 data points' do
     let(:user2) { create(:user, email: "user2@mail.com", nickname: "Userman2", role: "user") }
     let(:credentials2) { user2.create_new_auth_token }
     let!(:headers2) { { HTTP_ACCEPT: 'application/json' }.merge!(credentials2) }
@@ -47,8 +47,9 @@ RSpec.describe 'GET /api/v1/excels', type: :request do
       expect(response).to have_http_status 200
     end
 
-    it 'returns first ten data entries' do
+    it 'returns most recent ten data entries' do
       expect(response_json[0]["data"].count).to eq 10
+      expect(response_json[0]["data"][9]["Ticker"]).to eq "BB"
     end
   end
 end
