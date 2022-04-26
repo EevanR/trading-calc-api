@@ -37,7 +37,7 @@ RSpec.describe 'GET /api/v1/excels', type: :request do
     let(:user2) { create(:user, email: "user2@mail.com", nickname: "Userman2", role: "user") }
     let(:credentials2) { user2.create_new_auth_token }
     let!(:headers2) { { HTTP_ACCEPT: 'application/json' }.merge!(credentials2) }
-    let(:excel2) { create(:excel, user_id:user2.id ) }
+    let!(:excel2) { create(:excel, user_id:user2.id ) }
     before do
       get '/api/v1/excels',
       headers: headers2

@@ -16,6 +16,7 @@ class Api::V1::ExcelsController < ApplicationController
       entries = nil
       render json: entries
     else
+      entries[0].data = entries[0].data.slice(0, 10)
       render json: entries
     end
   end
