@@ -29,6 +29,32 @@ RSpec.describe 'POST /api/v1/admin/excels', type: :request do
     end
   end
 
+  describe 'Unsuccesfully creates trade when not subscriber' do
+    let(:user2) { create(:user, role: "user") }
+    let(:credentials2) { user2.create_new_auth_token }
+    let!(:headers2) { { HTTP_ACCEPT: 'application/json' }.merge!(credentials2) }
+    before do
+      post '/api/v1/admin/excels',
+      params: {
+        excel: {
+          data: [
+            {Ticker: "AMC", NetProfit: 234234},
+            {Ticker: "FB", NetProfit: 23.00}
+          ]
+        }
+      },
+      headers: headers2
+    end
+
+    it 'returns a 200 response status' do
+      expect(response).to have_http_status 403
+    end
+
+    it 'returns not authorized response' do
+      binding.pry
+    end
+  end
+
   describe 'unsuccesfully creates trade when no User' do
     before do
       post '/api/v1/admin/excels',
