@@ -8,4 +8,12 @@ class ExcelPolicy < ApplicationPolicy
   def index?
     @user.subscriber?
   end
+
+  def create?
+    @user.subscriber?
+  end
+
+  def update?
+    @user.subscriber?
+  end
 end
