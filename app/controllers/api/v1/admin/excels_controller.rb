@@ -32,4 +32,14 @@ class Api::V1::Admin::ExcelsController < ApplicationController
       render json: entries
     end
   end
+
+  private
+
+  def excels_params
+    params.require(:excel).permit(:user_id, :fees, data: [:Ticker, :NetProfit, :GrossProfit, :ShareCount, :TimeStamp, :Date, :Commissions])
+  end
+
+  def update_params
+    params.permit(:user_id, :fees, data: [:Ticker, :NetProfit, :GrossProfit, :ShareCount, :TimeStamp, :Date, :Commissions])
+  end
 end
