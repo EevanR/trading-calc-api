@@ -30,7 +30,7 @@ RSpec.describe 'POST /api/v1/admin/excels', type: :request do
   end
 
   describe 'Unsuccesfully creates trade when not subscriber' do
-    let(:user2) { create(:user, role: "user") }
+    let(:user2) { create(:user, email: "user2@mail.com", nickname: "Userman2", role: "user") }
     let(:credentials2) { user2.create_new_auth_token }
     let!(:headers2) { { HTTP_ACCEPT: 'application/json' }.merge!(credentials2) }
     before do
@@ -51,7 +51,7 @@ RSpec.describe 'POST /api/v1/admin/excels', type: :request do
     end
 
     it 'returns not authorized response' do
-      binding.pry
+      expect(response_json['errors']).to eq "Not Authorized"
     end
   end
 
