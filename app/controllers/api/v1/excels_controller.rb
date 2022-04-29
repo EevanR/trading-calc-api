@@ -36,7 +36,7 @@ class Api::V1::ExcelsController < ApplicationController
     entry = Excel.find(params[:id])
     entry.update(update_params)
     if entry.persisted? 
-      entry[0].data = entry[0].data.slice(entry[0].data.length-10,entry[0].data.length)
+      entry.data = entry.data.slice(entry.data.length-10,entry.data.length)
       render json: entry
     else
       render json: { error: entry.errors.full_messages }, status: 422
