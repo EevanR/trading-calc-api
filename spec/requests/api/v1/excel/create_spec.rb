@@ -12,7 +12,17 @@ RSpec.describe 'POST /api/v1/excels', type: :request do
         excel: {
           data: [
             {Ticker: "AMC", NetProfit: 234234},
-            {Ticker: "FB", NetProfit: 23.00}
+            {Ticker: "FB", NetProfit: 23.00},
+            {Ticker: "AMZN", NetProfit: 234234},
+            {Ticker: "AAPL", NetProfit: 23.00},
+            {Ticker: "MSFT", NetProfit: 234234},
+            {Ticker: "YTEN", NetProfit: 23.00},
+            {Ticker: "GSUM", NetProfit: 234234},
+            {Ticker: "CASA", NetProfit: 23.00},
+            {Ticker: "SAVA", NetProfit: 234234},
+            {Ticker: "FRGE", NetProfit: 23.00},
+            {Ticker: "GME", NetProfit: 234234},
+            {Ticker: "DRYS", NetProfit: 23.00},
           ]
         }
       },
@@ -23,9 +33,13 @@ RSpec.describe 'POST /api/v1/excels', type: :request do
       expect(response).to have_http_status 200
     end
 
-    it 'returns value from grossData array' do
-      expect(response_json["data"][0]["Ticker"]).to eq "AMC"
+    it 'returns value from Data array' do
+      expect(response_json["data"][0]["Ticker"]).to eq "AMZN"
       expect(response_json["data"][1]["NetProfit"]).to eq "23.0"
+    end
+
+    it 'returns limited data when not subscriber' do
+      expect(response_json["data"].count).to eq 10
     end
   end
 
@@ -62,7 +76,7 @@ RSpec.describe 'POST /api/v1/excels', type: :request do
       expect(response).to have_http_status 200
     end
 
-    it 'returns a 200 response status' do
+    it 'returns updated fees data of 23.32' do
       expect(response_json["fees"]).to eq 23.32
     end
   end
