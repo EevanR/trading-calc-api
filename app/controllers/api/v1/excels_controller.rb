@@ -4,8 +4,12 @@ class Api::V1::ExcelsController < ApplicationController
   def create
     entry = Excel.create(excels_params.merge(user_id: current_user.id))
     if entry.persisted?
-      entry.data = entry.data.slice(entry.data.length-10,entry.data.length)
-      render json: entry
+      if entry.data.length >= 10
+        entry.data = entry.data.slice(entry.data.length-10,entry.data.length)
+        render json: entry
+      else
+        render json: entry
+      end
     else
       render json: { errors: entry.errors.full_messages }, status: 422
     end
@@ -17,8 +21,12 @@ class Api::V1::ExcelsController < ApplicationController
       entries = nil
       render json: entries
     else
-      entries[0].data = entries[0].data.slice(entries[0].data.length-10,entries[0].data.length)
-      render json: entries
+      if entries[0].data.length >= 10
+        entries[0].data = entries[0].data.slice(entries[0].data.length-10,entries[0].data.length)
+        render json: entries
+      else
+        render json: entries
+      end
     end
   end
 
