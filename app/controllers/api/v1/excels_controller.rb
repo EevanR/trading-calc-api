@@ -36,8 +36,12 @@ class Api::V1::ExcelsController < ApplicationController
     entry = Excel.find(params[:id])
     entry.update(update_params)
     if entry.persisted? 
-      entry.data = entry.data.slice(entry.data.length-10,entry.data.length)
-      render json: entry
+      if entry.data.length >= 10
+        entry.data = entry.data.slice(entry.data.length-10,entry.data.length)
+        render json: entry
+      else
+        render json: entry
+      end
     else
       render json: { error: entry.errors.full_messages }, status: 422
     end
@@ -52,5 +56,4 @@ class Api::V1::ExcelsController < ApplicationController
   def update_params
     params.permit(:user_id, :fees, data: [:Ticker, :NetProfit, :GrossProfit, :ShareCount, :TimeStamp, :Date, :Commissions])
   end
-
 end
