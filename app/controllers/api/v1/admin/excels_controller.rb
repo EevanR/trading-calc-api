@@ -29,7 +29,7 @@ class Api::V1::Admin::ExcelsController < ApplicationController
       entries = nil
       render json: entries
     else
-      render json: entries
+      render json: entries, each_serializer: Excel::IndexSerializer
     end
   end
 
