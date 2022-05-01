@@ -48,8 +48,8 @@ RSpec.describe 'GET /api/v1/excels', type: :request do
     end
 
     it 'returns most recent ten data entries' do
-      expect(response_json[0]["data"].count).to eq 10
-      expect(response_json[0]["data"][9]["Ticker"]).to eq "BB"
+      expect(response_json['excels'][0]['data'].count).to eq 10
+      expect(response_json['excels'][0]['data'][9]['Ticker']).to eq "BB"
     end
   end
 end

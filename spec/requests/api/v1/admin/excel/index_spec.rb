@@ -40,7 +40,7 @@ RSpec.describe 'GET /api/v1/admin/excels', type: :request do
     end
 
     it 'returns full Excel data set' do
-      expect(response_json[0]["data"].count).to eq 12
+      expect(response_json['excels'][0]['data'].count).to eq 12
     end
   end
 

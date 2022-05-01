@@ -21,12 +21,7 @@ class Api::V1::ExcelsController < ApplicationController
       entries = nil
       render json: entries
     else
-      if entries[0].data.length >= 10
-        entries[0].data = entries[0].data.slice(entries[0].data.length-10,entries[0].data.length)
-        render json: entries
-      else
-        render json: entries
-      end
+        render json: entries, each_serializer: Excel::IndexSerializer
     end
   end
 

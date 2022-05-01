@@ -170,6 +170,22 @@
         null,
         null
       ],
+      "/Users/tiffanyhutton/Craft_Projects/trading-calc-api/app/serializers/excel/index_serializer.rb": [
+        1,
+        1,
+        1,
+        null,
+        1,
+        null,
+        1,
+        3,
+        3,
+        null,
+        0,
+        null,
+        null,
+        null
+      ],
       "/Users/tiffanyhutton/Craft_Projects/trading-calc-api/app/mailers/application_mailer.rb": [
         0,
         0,
@@ -187,23 +203,6 @@
         0
       ],
       "/Users/tiffanyhutton/Craft_Projects/trading-calc-api/app/models/trade.rb": [
-        0,
-        0,
-        0
-      ],
-      "/Users/tiffanyhutton/Craft_Projects/trading-calc-api/app/serializers/excels/index_serializer.rb": [
-        0,
-        0,
-        0,
-        null,
-        0,
-        null,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
         0,
         0,
         0
@@ -286,11 +285,6 @@
         0,
         0,
         null,
-        0,
-        0,
-        0,
-        0,
-        0,
         0,
         0,
         0,
@@ -498,6 +492,6 @@
         0
       ]
     },
-    "timestamp": 1651389661
+    "timestamp": 1651394252
   }
 }

@@ -1,15 +1,14 @@
-class Excels::IndexSerializer < ActiveModel::Serializer
+class Excel::IndexSerializer < ActiveModel::Serializer
   include ActionView::Helpers::TextHelper
   include Rails.application.routes.url_helpers
 
   attributes :id, :data, :fees, :created_at
 
-  def trades
-    binding.pry
-    if instance_options[:role] == 'subscriber'
-      object.trades
+  def data
+    if instance_options[:scope].role == 'subscriber'
+      object.data
     else
-      # truncate(object.body, length: 75)
+      object.data.length > 10 ? object.data = object.data.slice(object.data.length-10,object.data.length) : object.data
     end
   end
 end
