@@ -11,6 +11,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'devise_token_auth'
 gem 'rest-client'
 gem "pundit", "~> 2.2"
+gem 'active_model_serializers', '~> 0.10.0'
 
 group :development, :test do
   gem 'pry-rails'
