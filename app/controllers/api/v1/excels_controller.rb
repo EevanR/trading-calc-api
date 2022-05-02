@@ -39,12 +39,7 @@ class Api::V1::ExcelsController < ApplicationController
     entry = Excel.find(params[:id])
     entry.update(update_params)
     if entry.persisted? 
-      if entry.data.length >= 10
-        entry.data = entry.data.slice(entry.data.length-10,entry.data.length)
-        render json: entry
-      else
-        render json: entry
-      end
+      render json: entry, each_serializer: Excel::UpdateSerializer
     else
       render json: { error: entry.errors.full_messages }, status: 422
     end
