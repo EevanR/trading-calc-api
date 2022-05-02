@@ -39,7 +39,7 @@ class Api::V1::ExcelsController < ApplicationController
     entry = Excel.find(params[:id])
     entry.update(update_params)
     if entry.persisted? 
-      render json: entry, each_serializer: Excel::UpdateSerializer
+      render json: entry, serializer: Excel::UpdateSerializer
     else
       render json: { error: entry.errors.full_messages }, status: 422
     end
