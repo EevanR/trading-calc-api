@@ -37,12 +37,12 @@ RSpec.describe 'POST /api/v1/excels', type: :request do
     end
 
     it 'returns value from Data array' do
-      expect(response_json["data"][0]["Ticker"]).to eq "AMZN"
-      expect(response_json["data"][1]["NetProfit"]).to eq "23.0"
+      expect(response_json['excel']["data"][0]["Ticker"]).to eq "AMZN"
+      expect(response_json['excel']["data"][1]["NetProfit"]).to eq "23.0"
     end
 
     it 'returns limited data when not subscriber' do
-      expect(response_json["data"].count).to eq 10
+      expect(response_json['excel']["data"].count).to eq 10
     end
   end
 
@@ -80,7 +80,7 @@ RSpec.describe 'POST /api/v1/excels', type: :request do
     end
 
     it 'returns updated fees data of 23.32' do
-      expect(response_json["fees"]).to eq 23.32
+      expect(response_json['excel']["fees"]).to eq 23.32
     end
   end
 end
