@@ -20,7 +20,7 @@ RSpec.describe 'PATCH /api/v1/admin/excels/:id', type: :request do
     end
 
     it 'returns data from fees' do
-      expect(response_json["fees"]).to eq -14.31
+      expect(response_json['excel']["fees"]).to eq -14.31
     end
   end
 
@@ -51,12 +51,12 @@ RSpec.describe 'PATCH /api/v1/admin/excels/:id', type: :request do
     end
 
     it 'returns full range of data when subscriber' do
-      expect(response_json['data'].count).to eq 12
+      expect(response_json['excel']['data'].count).to eq 12
     end
 
     it 'returns updatd data set' do
-      expect(response_json['data'][0]['NetProfit']).to eq "234234"
-      expect(response_json['data'][11]['Ticker']).to eq "NEW DATA"
+      expect(response_json['excel']['data'][0]['NetProfit']).to eq "234234"
+      expect(response_json['excel']['data'][11]['Ticker']).to eq "NEW DATA"
     end
   end
 end

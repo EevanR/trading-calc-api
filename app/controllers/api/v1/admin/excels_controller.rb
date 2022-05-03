@@ -16,7 +16,7 @@ class Api::V1::Admin::ExcelsController < ApplicationController
     authorize(entry)
     entry.update(update_params)
     if entry.persisted? 
-      render json: entries, serializer: Excel::UpdateSerializer
+      render json: entry, serializer: Excel::UpdateSerializer
     else
       render json: { error: entry.errors.full_messages }, status: 422
     end
