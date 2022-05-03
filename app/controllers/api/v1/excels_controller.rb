@@ -4,12 +4,7 @@ class Api::V1::ExcelsController < ApplicationController
   def create
     entry = Excel.create(excels_params.merge(user_id: current_user.id))
     if entry.persisted?
-      if entry.data.length >= 10
-        entry.data = entry.data.slice(entry.data.length-10,entry.data.length)
-        render json: entry
-      else
-        render json: entry
-      end
+      render json: entry, serializer: Excel::CreateSerializer
     else
       render json: { errors: entry.errors.full_messages }, status: 422
     end
