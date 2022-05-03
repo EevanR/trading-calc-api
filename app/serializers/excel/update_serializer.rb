@@ -5,6 +5,10 @@ class Excel::UpdateSerializer < ActiveModel::Serializer
   attributes :id, :data, :fees, :created_at
 
   def data
-    binding.pry
+    if instance_options[:scope].role == 'subscriber'
+      object.data
+    else
+      object.data.length > 10 ? object.data = object.data.slice(object.data.length-10,object.data.length) : object.data
+    end
   end
 end

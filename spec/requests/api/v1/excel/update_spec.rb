@@ -20,7 +20,7 @@ RSpec.describe 'PATCH /api/v1/excels/:id', type: :request do
     end
 
     it 'expects fees to equal -14.31' do
-      expect(response_json["fees"]).to eq -14.31
+      expect(response_json['excel']['fees']).to eq -14.31
     end
   end
 
@@ -41,13 +41,17 @@ RSpec.describe 'PATCH /api/v1/excels/:id', type: :request do
     end
 
     it 'returns updated ticker data' do
-      expect(response_json['data'][0]['NetProfit']).to eq "234234"
+      expect(response_json['excel']['data'][0]['NetProfit']).to eq "234234"
     end
   end
 
   describe 'Succesfully return limited updated trade data when not subscriber' do
+    let(:user2) { create(:user, email: "user2@mail.com", nickname: "Userman2", role: "user") }
+    let(:credentials2) { user2.create_new_auth_token }
+    let!(:headers2) { { HTTP_ACCEPT: 'application/json' }.merge!(credentials2) }
+    let!(:excel2) { create(:excel, user_id:user2.id ) }
     before do
-      patch "/api/v1/excels/#{excel.id}",
+      patch "/api/v1/excels/#{excel2.id}",
       params: {
         data: [
           {Ticker: "AMC", NetProfit: 234234},
@@ -64,7 +68,7 @@ RSpec.describe 'PATCH /api/v1/excels/:id', type: :request do
           {Ticker: "DRYS", NetProfit: 1000000.00},
         ]
       },
-      headers: headers
+      headers: headers2
     end
 
     it 'returns a 200 response status' do
@@ -72,15 +76,15 @@ RSpec.describe 'PATCH /api/v1/excels/:id', type: :request do
     end
 
     it 'returns updated ticker data' do
-      expect(response_json['data'][9]['NetProfit']).to eq "1000000.0"
+      expect(response_json['excel']['data'][9]['NetProfit']).to eq "1000000.0"
     end
 
     it 'returns limited data length to 10 entries' do
-      expect(response_json['data'].length).to eq 10
+      expect(response_json['excel']['data'].length).to eq 10
     end
 
     it 'returns most previous data entries' do
-      expect(response_json['data'][0]['Ticker']).to eq "AMZN"
+      expect(response_json['excel']['data'][0]['Ticker']).to eq "AMZN"
     end
   end
 end
