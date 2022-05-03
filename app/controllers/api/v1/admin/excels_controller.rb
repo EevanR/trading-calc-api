@@ -5,7 +5,7 @@ class Api::V1::Admin::ExcelsController < ApplicationController
     entry = Excel.create(excels_params.merge(user_id: current_user.id))
     authorize(entry)
     if entry.persisted?
-      render json: entry
+      render json: entry, serializer: Excel::CreateSerializer
     else
       render json: { errors: entry.errors.full_messages }, status: 422
     end
@@ -16,7 +16,7 @@ class Api::V1::Admin::ExcelsController < ApplicationController
     authorize(entry)
     entry.update(update_params)
     if entry.persisted? 
-      render json: entry
+      render json: entries, serializer: Excel::UpdateSerializer
     else
       render json: { error: entry.errors.full_messages }, status: 422
     end
