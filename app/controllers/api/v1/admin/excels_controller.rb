@@ -1,8 +1,9 @@
-class Api::V1::ExcelsController < ApplicationController
+class Api::V1::Admin::ExcelsController < ApplicationController
   before_action :authenticate_user!
 
   def create
     entry = Excel.create(excels_params.merge(user_id: current_user.id))
+    authorize(entry)
     if entry.persisted?
       render json: entry, serializer: Excel::CreateSerializer
     else
@@ -10,33 +11,25 @@ class Api::V1::ExcelsController < ApplicationController
     end
   end
 
-  def index
-    entries = Excel.where(user_id: current_user.id)
-    if entries == []
-      entries = nil
-      render json: entries
-    else
-        render json: entries, each_serializer: Excel::IndexSerializer
-    end
-  end
-
-  def destroy
-    entry = Excel.find(params[:id])
-    if entry.user_id === current_user.id
-      entry.destroy
-      render json: { message: "Entry Deleted" }, status: 200
-    else
-      render json: { errors: ["You are not authorized for this action."] }, status: 401
-    end
-  end
-
   def update
     entry = Excel.find(params[:id])
+    authorize(entry)
     entry.update(update_params)
     if entry.persisted? 
       render json: entry, serializer: Excel::UpdateSerializer
     else
       render json: { error: entry.errors.full_messages }, status: 422
+    end
+  end
+
+  def index
+    entries = Excel.where(user_id: current_user.id)
+    authorize(entries)
+    if entries == []
+      entries = nil
+      render json: entries
+    else
+      render json: entries, each_serializer: Excel::IndexSerializer
     end
   end
 

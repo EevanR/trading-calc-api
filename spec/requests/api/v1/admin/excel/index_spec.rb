@@ -1,4 +1,4 @@
-RSpec.describe 'GET /api/v1/excels', type: :request do
+RSpec.describe 'GET /api/v1/admin/excels', type: :request do
   let(:user) { create(:user) }
   let(:credentials) { user.create_new_auth_token }
   let!(:headers) { { HTTP_ACCEPT: 'application/json' }.merge!(credentials) }
@@ -6,7 +6,7 @@ RSpec.describe 'GET /api/v1/excels', type: :request do
 
   describe 'Successfully index excel entries' do
     before do
-      get '/api/v1/excels',
+      get '/api/v1/admin/excels',
       headers: headers
     end
     
@@ -21,35 +21,45 @@ RSpec.describe 'GET /api/v1/excels', type: :request do
 
   describe 'unsuccessfully index unauthorized excel entries' do
     before do
-      get '/api/v1/excels'
+      get '/api/v1/admin/excels'
     end
     
     it 'returns a 401 response status' do
       expect(response).to have_http_status 401
     end
 
-    it "returns sign in error message" do
+    it "returns not sign in error message" do
       expect(response_json["errors"][0]).to eq "You need to sign in or sign up before continuing."
     end
   end
 
-  describe 'shows limited data when not subscriber, most recent 10 data points' do
+  describe 'Show full entry when subscriber' do
+    before do
+      get "/api/v1/admin/excels",
+      headers: headers
+    end
+
+    it 'returns full Excel data set' do
+      expect(response_json['excels'][0]['data'].count).to eq 12
+    end
+  end
+
+  describe 'Show error message when not subscriber' do
     let(:user2) { create(:user, email: "user2@mail.com", nickname: "Userman2", role: "user") }
     let(:credentials2) { user2.create_new_auth_token }
     let!(:headers2) { { HTTP_ACCEPT: 'application/json' }.merge!(credentials2) }
-    let!(:excel2) { create(:excel, user_id:user2.id ) }
+    let(:excel2) { create(:excel, user_id:user2.id ) }
     before do
-      get '/api/v1/excels',
+      get "/api/v1/admin/excels",
       headers: headers2
     end
-    
-    it 'returns a 200 response status' do
-      expect(response).to have_http_status 200
+
+    it 'returns a 403 response status' do
+      expect(response).to have_http_status 403
     end
 
-    it 'returns most recent ten data entries' do
-      expect(response_json['excels'][0]['data'].count).to eq 10
-      expect(response_json['excels'][0]['data'][9]['Ticker']).to eq "BB"
+    it 'returns not authorized error' do
+      expect(response_json["errors"]).to eq "Not Authorized"
     end
   end
 end

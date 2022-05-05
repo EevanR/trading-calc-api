@@ -22,6 +22,10 @@ RSpec.describe 'POST /api/v1/auth', type: :request do
     it 'returns a success message' do
       expect(response_json['status']).to eq 'success'
     end
+
+    it "returns default role as 'user'" do
+      expect(response_json['data']['role']).to eq 'user'
+    end
   end
 
   context 'when a user submits' do

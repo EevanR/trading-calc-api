@@ -5,5 +5,6 @@ FactoryBot.define do
     password { "password" }
     password_confirmation { "password" }
     risk { 0.01 }
+    role {"subscriber"}
   end
 end

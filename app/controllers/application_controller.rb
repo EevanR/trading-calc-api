@@ -1,8 +1,15 @@
 class ApplicationController < ActionController::API
-        include DeviseTokenAuth::Concerns::SetUserByToken
-        rescue_from ActiveRecord::RecordNotUnique, :with => :error_render_method
-
+  include Pundit::Authorization
+  include DeviseTokenAuth::Concerns::SetUserByToken
   before_action :configure_permitted_parameters, if: :devise_controller?
+
+  rescue_from ActiveRecord::RecordNotUnique, :with => :error_render_method
+  rescue_from Pundit::NotAuthorizedError, with: :not_authorized
+
+  def not_authorized 
+    render json: { errors: 'Not Authorized' }, status: 403
+  end 
+  
 
   def error_render_method
     render json: { errors: {full_messages: ["Please choose another Username"]}}, status: 401
