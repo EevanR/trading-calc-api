@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :setups, only: [:create, :index, :show, :destroy, :update]
       resources :tweets, only: [:create, :index, :show, :destroy, :update]
       resources :excels, only: [:create, :index, :destroy, :update]
+      resources :subscriptions, only: [:create]
       namespace :admin, defaults: { format: :json } do
         resources :users, only: [:update, :show]
         resources :excels, only: [:index, :create, :update]
