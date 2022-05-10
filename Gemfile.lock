@@ -224,6 +224,11 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    stripe (6.0.0)
+    stripe-rails (2.3.4)
+      rails (>= 5.1)
+      responders
+      stripe (>= 3.15.0)
     sync (0.5.0)
     term-ansicolor (1.7.1)
       tins (~> 1.0)
@@ -265,6 +270,7 @@ DEPENDENCIES
   shoulda-matchers
   spring
   spring-watcher-listen (~> 2.0.0)
+  stripe-rails
 
 RUBY VERSION
    ruby 2.5.1p57
