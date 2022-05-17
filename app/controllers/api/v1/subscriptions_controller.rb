@@ -3,27 +3,35 @@ class Api::V1::SubscriptionsController < ApplicationController
   rescue_from Stripe::InvalidRequestError, with: :invalid_token_id
   
   def create
-    if params[:stripeToken]
-      customer = Stripe::Customer.create(
-        email: current_user.email,
-        source: params[:stripeToken]
-      )
+    Stripe.api_key = Rails.application.credentials.stripe[:secret_key]
 
-      charge = Stripe::Charge.create(
-        customer: customer.id,
-        currency: 'sek',
-        amount: 999,
-        description: 'Monthly Subscription'
-      )
+    prices = Stripe::Price.list(
+      lookup_keys: [params['lookup_key']],
+      expand: ['data.product']
+    )
+
+binding.pry
+    # if params[:stripeToken]
+    #   customer = Stripe::Customer.create(
+    #     email: current_user.email,
+    #     source: params[:stripeToken]
+    #   )
+
+    #   charge = Stripe::Charge.create(
+    #     customer: customer.id,
+    #     currency: 'sek',
+    #     amount: 999,
+    #     description: 'Monthly Subscription'
+    #   )
       
-      if (charge.paid)
-        current_user.role = 'subscriber'
-        current_user.save
-        render json: { message: 'Transaction cleared'}
-      end
-    else
-      render json: { message: 'No Stripe token detected'}
-    end
+    #   if (charge.paid)
+    #     current_user.role = 'subscriber'
+    #     current_user.save
+    #     render json: { message: 'Transaction cleared'}
+    #   end
+    # else
+    #   render json: { message: 'No Stripe token detected'}
+    # end
   end
 
   private
