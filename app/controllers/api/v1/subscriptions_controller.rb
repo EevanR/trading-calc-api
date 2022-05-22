@@ -10,7 +10,20 @@ class Api::V1::SubscriptionsController < ApplicationController
       expand: ['data.product']
     )
 
-binding.pry
+    session = Stripe::Checkout::Session.create({
+      mode: 'subscription',
+      line_items: [{
+        quantity: 1,
+        price: prices.data[0].id
+      }],
+      success_url: 'http://localhost:3001/panes' + '?success=true&session_id={CHECKOUT_SESSION_ID}',
+      cancel_url: 'http://localhost:3001/panes' + '?canceled=true',
+    })
+    
+    render json: session
+  end
+
+
     # if params[:stripeToken]
     #   customer = Stripe::Customer.create(
     #     email: current_user.email,
@@ -32,7 +45,6 @@ binding.pry
     # else
     #   render json: { message: 'No Stripe token detected'}
     # end
-  end
 
   private
 
