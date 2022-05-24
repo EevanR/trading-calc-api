@@ -5,9 +5,9 @@ class Api::V1::WebhooksController < ApplicationController
     # If you are testing with the CLI, find the secret by running 'stripe listen'
     # If you are using an endpoint defined with the API or dashboard, look in your webhook settings
     # at https://dashboard.stripe.com/webhooks
-    webhook_secret = Rails.application.credentials.stripe[:webhook_secret]
+    webhook_secret = 'whsec_99cee02f9b8aaedf6d0cda04cf20b137537239806b9979a9a1159bae0d1943d0'
     payload = request.body.read
-    binding.pry
+    
     if !webhook_secret.empty?
       sig_header = request.env['HTTP_STRIPE_SIGNATURE']
       event = nil
@@ -17,9 +17,11 @@ class Api::V1::WebhooksController < ApplicationController
           payload, sig_header, webhook_secret
         )
       rescue JSON::ParserError => e
+        # Invalid payload
         status 400
         return
       rescue Stripe::SignatureVerificationError => e
+        # Invalid signature
         puts '⚠️  Webhook signature verification failed.'
         status 400
         return
@@ -28,14 +30,35 @@ class Api::V1::WebhooksController < ApplicationController
       data = JSON.parse(payload, symbolize_names: true)
       event = Stripe::Event.construct_from(data)
     end
-
+    # Get the type of webhook event sent - used to check the status of PaymentIntents.
     event_type = event['type']
     data = event['data']
     data_object = data['object']
   
-    content_type 'application/json'
-    {
-      status: 'success'
-    }.to_json
+    if event.type == 'customer.subscription.deleted'
+      # handle subscription canceled automatically based
+      # upon your subscription settings. Or if the user cancels it.
+      # puts data_object
+      puts "Subscription canceled: #{event.id}"
+    end
+  
+    if event.type == 'customer.subscription.updated'
+      # handle subscription updated
+      # puts data_object
+      puts "Subscription updated: #{event.id}"
+    end
+  
+    if event.type == 'customer.subscription.created'
+      # handle subscription created
+      # puts data_object
+      puts "Subscription created: #{event.id}"
+    end
+  
+    if event.type == 'customer.subscription.trial_will_end'
+      # handle subscription trial ending
+      # puts data_object
+      puts "Subscription trial will end: #{event.id}"
+    end
+  binding.pry
   end
 end
