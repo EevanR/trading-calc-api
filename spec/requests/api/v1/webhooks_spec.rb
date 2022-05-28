@@ -17,7 +17,6 @@ RSpec.describe 'POST /api/v1/webhooks', type: :request do
         "Stripe-Signature": stripe_event_signature(event.to_json)
       }
       post '/api/v1/webhooks', params: event, headers: headers, as: :json
-
       expect(response.code).to eq('200')
     end
     

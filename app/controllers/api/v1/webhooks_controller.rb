@@ -39,10 +39,8 @@ class Api::V1::WebhooksController < ApplicationController
       puts "Subscription created: #{event.id}"
     end
   
-    if event.type == 'customer.subscription.trial_will_end'
-      puts "Subscription trial will end: #{event.id}"
+    if event.type == 'invoice.payment_succeeded'
+      render json: { paid: "#{data['object'].paid}" }, status: 200
     end
-    
-    binding.pry
   end
 end
