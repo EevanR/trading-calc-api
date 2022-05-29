@@ -25,20 +25,16 @@ class Api::V1::WebhooksController < ApplicationController
     data = event['data']
     data_object = data['object']
   
-    if event.type == 'customer.subscription.deleted'
-      puts "Subscription canceled: #{event.id}"
-    end
-  
     if event.type == 'customer.subscription.updated'
-      puts "Subscription updated: #{event.id}"
+      render json: { message: "#{event.type}" }, status: 200
     end
-  
-    if event.type == 'invoice.payment_failed'
-      render json: { paid: "#{data['object'].paid}" }, status: 400
-    end
-  
-    if event.type == 'invoice.payment_succeeded'
+
+    if event.type == 'invoice.payment_succeeded' || event.type == 'charge.succeeded'
       render json: { paid: "#{data['object'].paid}" }, status: 200
+    end
+  
+    if event.type == 'invoice.payment_failed'|| event.type == 'charge.failed'
+      render json: { paid: "#{data['object'].paid}" }, status: 400
     end
   end
 end
