@@ -11,18 +11,38 @@ RSpec.describe 'POST /api/v1/webhooks', type: :request do
     after(:each) { StripeMock.stop }
 
   describe 'payment success webhook' do
-    it "mocks a stripe webhook" do
+    before do
       event = StripeMock.mock_webhook_event('invoice.payment_succeeded')
       headers = {
         "Stripe-Signature": stripe_event_signature(event.to_json)
       }
       post '/api/v1/webhooks', params: event, headers: headers, as: :json
+    end
+
+    it "mocks a stripe webhook successfully" do
       expect(response.code).to eq('200')
     end
-    
-    it "mocks stripe connect webhooks" do
-      event = StripeMock.mock_webhook_event('customer.created', account: 'acc_123123')
-      expect(event.account).to eq('acc_123123')
+
+    it "recieves success payment status" do
+      expect(response_json['paid']).to eq('true')
+    end
+  end
+
+  describe 'payment webhook fails' do
+    before do
+      event = StripeMock.mock_webhook_event('invoice.payment_succeeded')
+      headers = {
+        "Stripe-Signature": ""
+      }
+      post '/api/v1/webhooks', params: event, headers: headers, as: :json
+    end
+
+    it "responds with error code 400" do
+      expect(response.code).to eq('400')
+    end
+
+    it "responds with failed signature verification message" do
+      expect(response_json['errors']).to eq("⚠️  Webhook signature verification failed.")
     end
   end
 end 

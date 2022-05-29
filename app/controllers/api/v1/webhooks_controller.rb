@@ -12,11 +12,9 @@ class Api::V1::WebhooksController < ApplicationController
           payload, sig_header, webhook_secret
         )
       rescue JSON::ParserError => e
-        status 400
-        return
+        render json: { errors: "JSON parse error" }, status: 400
       rescue Stripe::SignatureVerificationError => e
-        puts '⚠️  Webhook signature verification failed.'
-        status 400
+        render json: { errors: "⚠️  Webhook signature verification failed." }, status: 400
         return
       end
     else
