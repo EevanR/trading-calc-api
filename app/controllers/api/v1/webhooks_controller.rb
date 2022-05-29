@@ -33,8 +33,8 @@ class Api::V1::WebhooksController < ApplicationController
       puts "Subscription updated: #{event.id}"
     end
   
-    if event.type == 'customer.subscription.created'
-      puts "Subscription created: #{event.id}"
+    if event.type == 'invoice.payment_failed'
+      render json: { paid: "#{data['object'].paid}" }, status: 400
     end
   
     if event.type == 'invoice.payment_succeeded'
