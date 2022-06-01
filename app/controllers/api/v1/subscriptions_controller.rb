@@ -5,6 +5,10 @@ class Api::V1::SubscriptionsController < ApplicationController
   def create
     Stripe.api_key = Rails.application.credentials.stripe[:secret_key]
 
+    customer = Stripe::Customer.create(
+      email: current_user.email,
+    )
+
     prices = Stripe::Price.list(
       lookup_keys: [params['lookup_key']],
       expand: ['data.product']
@@ -12,6 +16,7 @@ class Api::V1::SubscriptionsController < ApplicationController
 
     session = Stripe::Checkout::Session.create({
       mode: 'subscription',
+      customer: customer.id,
       line_items: [{
         quantity: 1,
         price: prices.data[0].id
@@ -19,7 +24,6 @@ class Api::V1::SubscriptionsController < ApplicationController
       success_url: 'http://localhost:3001/panes' + '?success=true&session_id={CHECKOUT_SESSION_ID}',
       cancel_url: 'http://localhost:3001/panes' + '?canceled=true',
     })
-    
     render json: session
   end
 

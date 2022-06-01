@@ -36,5 +36,9 @@ class Api::V1::WebhooksController < ApplicationController
     if event.type == 'invoice.payment_failed'|| event.type == 'charge.failed'
       render json: { paid: "#{data['object'].paid}" }, status: 400
     end
+
+    if event.type == 'subscription_schedule.canceled'
+      render json: { message: "#{event.type}" }, status: 200
+    end
   end
 end

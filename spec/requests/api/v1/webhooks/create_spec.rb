@@ -3,7 +3,7 @@ require 'stripe_mock'
 require 'rails_helper'
 
 RSpec.describe 'POST /api/v1/webhooks', type: :request do
-  let(:user) { create(:user) }
+  let(:user) { create(:user, role: 'user') }
   let(:credentials) { user.create_new_auth_token }
   let!(:headers2) { { HTTP_ACCEPT: 'application/json' }.merge!(credentials) }
   let(:stripe_helper) { StripeMock.create_test_helper }
@@ -82,7 +82,7 @@ RSpec.describe 'POST /api/v1/webhooks', type: :request do
     end
   end
 
-  describe 'charge success' do
+  describe 'charge failed' do
     before do
       event = StripeMock.mock_webhook_event('charge.failed')
       headers = {
