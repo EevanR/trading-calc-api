@@ -22,23 +22,15 @@ class Api::V1::WebhooksController < ApplicationController
       event = Stripe::Event.construct_from(data)
     end
     event_type = event['type']
-    data = event['data']
-    data_object = data['object']
+    data_object = event.data['object']
   
-    if event.type == 'customer.subscription.updated'
-      render json: { message: "#{event.type}" }, status: 200
+    if event.type.present?
+      # binding.pry
+      # session = Session.find(event.data.object.id)
+      # data_object['paid'] === true ? 
+      # render json: { message: "#{event.type}" }, status: 200
     end
 
-    if event.type == 'invoice.payment_succeeded' || event.type == 'charge.succeeded'
-      render json: { paid: "#{data['object'].paid}" }, status: 200
-    end
-  
-    if event.type == 'invoice.payment_failed'|| event.type == 'charge.failed'
-      render json: { paid: "#{data['object'].paid}" }, status: 400
-    end
-
-    if event.type == 'subscription_schedule.canceled'
-      render json: { message: "#{event.type}" }, status: 200
-    end
+    render json: { message: "success" }, status: 200
   end
 end

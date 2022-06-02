@@ -1,0 +1,2 @@
+class StripeSession < ApplicationRecord
+end
