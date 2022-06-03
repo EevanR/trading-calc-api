@@ -1,5 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe StripeSession, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'Stripe Sessions table' do
+    it { is_expected.to have_db_column :session_id }
+    it { is_expected.to have_db_column :customer_id }
+    it { is_expected.to have_db_column :user_id }
+  end
+
+  describe 'Associations' do
+    it { is_expected.to belong_to :user }
+  end
+
+  describe 'Factory' do
+    it 'should have valid Factory' do
+      expect(create(:stripe_session)).to be_valid
+    end
+  end
 end

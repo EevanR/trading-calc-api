@@ -8,7 +8,7 @@ class Api::V1::SubscriptionsController < ApplicationController
     customer = Stripe::Customer.create(
       email: current_user.email,
     )
-
+    
     prices = Stripe::Price.list(
       lookup_keys: [params['lookup_key']],
       expand: ['data.product']
