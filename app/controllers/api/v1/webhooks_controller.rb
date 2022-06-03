@@ -25,10 +25,11 @@ class Api::V1::WebhooksController < ApplicationController
     data_object = event.data['object']
   
     if event.type.present?
-      # binding.pry
-      # session = Session.find(event.data.object.id)
-      # data_object['paid'] === true ? 
-      # render json: { message: "#{event.type}" }, status: 200
+      session = StripeSession.find_by(session_id: event.data.object.id)
+      data_object['paid'] === true && session.status = "paid"
+      session.save
+      render json: session, status: 200
+      return
     end
 
     render json: { message: "success" }, status: 200

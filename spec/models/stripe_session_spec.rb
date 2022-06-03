@@ -5,6 +5,7 @@ RSpec.describe StripeSession, type: :model do
     it { is_expected.to have_db_column :session_id }
     it { is_expected.to have_db_column :customer_id }
     it { is_expected.to have_db_column :user_id }
+    it { is_expected.to have_db_column :status}
   end
 
   describe 'Associations' do
