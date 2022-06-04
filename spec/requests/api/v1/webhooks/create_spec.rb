@@ -28,99 +28,61 @@ RSpec.describe 'POST /api/v1/webhooks', type: :request do
       expect(response.code).to eq('200')
     end
 
-    it "recieves success payment status" do
-      binding.pry
-      expect(response_json['paid']).to eq('true')
+    it "session status is updated to paid" do
+      expect(StripeSession.find(stripe_session.id).status).to eq('paid')
+    end
+
+    it "user role is updated to subscriber" do
+      expect(User.find(stripe_session.user_id).role).to eq('subscriber')
     end
   end
 
-  # describe 'Signature webhook fails' do
-  #   before do
-  #     event = StripeMock.mock_webhook_event('invoice.payment_succeeded')
-  #     headers = {
-  #       "Stripe-Signature": ""
-  #     }
-  #     post '/api/v1/webhooks', params: event, headers: headers, as: :json
-  #   end
+  describe 'Signature verification fails' do
+    before do
+      event = StripeMock.mock_webhook_event('invoice.payment_succeeded')
+      headers = {
+        "Stripe-Signature": ""
+      }
+      post '/api/v1/webhooks', params: event, headers: headers, as: :json
+    end
 
-  #   it "responds with error code 400" do
-  #     expect(response.code).to eq('400')
-  #   end
+    it "responds with error code 400" do
+      expect(response.code).to eq('400')
+    end
 
-  #   it "responds with failed signature verification message" do
-  #     expect(response_json['errors']).to eq("⚠️  Webhook signature verification failed.")
-  #   end
-  # end
+    it "responds with failed signature verification message" do
+      expect(response_json['errors']).to eq("⚠️  Webhook signature verification failed.")
+    end
+  end
 
-  # describe 'invoice status as payment failed' do
-  #   before do
-  #     event = StripeMock.mock_webhook_event('invoice.payment_failed')
-  #     headers = {
-  #       "Stripe-Signature": stripe_event_signature(event.to_json)
-  #     }
-  #     post '/api/v1/webhooks', params: event, headers: headers, as: :json
-  #   end
+  describe 'charge failed' do
+    before do
+      event = StripeMock.mock_webhook_event('charge.failed', {
+        :id => stripe_session.session_id,
+        :customer => stripe_session.customer_id,
+        :email => user.email
+      })
+      headers = {
+        "Stripe-Signature": stripe_event_signature(event.to_json)
+      }
+      post '/api/v1/webhooks', params: event, headers: headers, as: :json
+    end
 
-  #   it "responds with error code 400" do
-  #     expect(response.code).to eq('400')
-  #   end
+    it "responds with 400 status code" do
+      expect(response.code).to eq('400')
+    end
 
-  #   it "responds with failed payment invoice status" do
-  #     expect(response_json['paid']).to eq('false')
-  #   end
-  # end
+    it "responds with error message" do
+      expect(response_json['message']).to eq("Payment Failed: charge.failed")
+    end
 
-  # describe 'charge success' do
-  #   before do
-  #     event = StripeMock.mock_webhook_event('charge.succeeded')
-  #     headers = {
-  #       "Stripe-Signature": stripe_event_signature(event.to_json)
-  #     }
-  #     post '/api/v1/webhooks', params: event, headers: headers, as: :json
-  #   end
+    it "session status is updated to paid" do
+      expect(StripeSession.find(stripe_session.id).status).to eq('pending')
+    end
 
-  #   it "responds with error code 200" do
-  #     expect(response.code).to eq('200')
-  #   end
-
-  #   it "paid = true status" do
-  #     expect(response_json['paid']).to eq('true')
-  #   end
-  # end
-
-  # describe 'charge failed' do
-  #   before do
-  #     event = StripeMock.mock_webhook_event('charge.failed')
-  #     headers = {
-  #       "Stripe-Signature": stripe_event_signature(event.to_json)
-  #     }
-  #     post '/api/v1/webhooks', params: event, headers: headers, as: :json
-  #   end
-
-  #   it "responds with error code 400" do
-  #     expect(response.code).to eq('400')
-  #   end
-
-  #   it "paid = false status" do
-  #     expect(response_json['paid']).to eq('false')
-  #   end
-  # end
-
-  # describe 'customer updates subscription' do
-  #   before do
-  #     event = StripeMock.mock_webhook_event('customer.subscription.updated')
-  #     headers = {
-  #       "Stripe-Signature": stripe_event_signature(event.to_json)
-  #     }
-  #     post '/api/v1/webhooks', params: event, headers: headers, as: :json
-  #   end
-
-  #   it "responds with error code 200" do
-  #     expect(response.code).to eq('200')
-  #   end
-
-  #   it "responds with subscription updated message" do
-  #     expect(response_json['message']).to eq('customer.subscription.updated')
-  #   end
-  # end
+    it "user role is updated to subscriber" do
+      binding.pry
+      expect(User.find(stripe_session.user_id).role).to eq('user')
+    end
+  end
 end 
