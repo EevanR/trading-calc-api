@@ -84,4 +84,50 @@ RSpec.describe 'POST /api/v1/webhooks', type: :request do
       expect(User.find(stripe_session.user_id).role).to eq('user')
     end
   end
+
+  describe 'charge failed' do
+    before do
+      event = StripeMock.mock_webhook_event('charge.failed', {
+        :id => stripe_session.session_id,
+        :customer => stripe_session.customer_id,
+        :email => user.email
+      })
+      headers = {
+        "Stripe-Signature": stripe_event_signature(event.to_json)
+      }
+      post '/api/v1/webhooks', params: event, headers: headers, as: :json
+    end
+
+    it "responds with 200 status code" do
+      expect(response.code).to eq('200')
+    end  
+
+    it "responds with error message" do
+      expect(response_json['message']).to eq("Webhook received - charge.failed")
+    end
+  end
+
+  describe 'payment failure and subscription status is updated to past due' do
+    let(:user_subscribed) { create(:user, email: "user2@mail.com", nickname: "Userman2", customer_id: "cus_0002") }
+
+    before do
+      event = StripeMock.mock_webhook_event('customer.subscription.deleted', {
+        :customer => user_subscribed.customer_id,
+        :email => user_subscribed.email,
+        :status => "canceled"
+      })
+      headers = {
+        "Stripe-Signature": stripe_event_signature(event.to_json)
+      }
+      post '/api/v1/webhooks', params: event, headers: headers, as: :json
+    end
+
+    it "responds with 200 status code" do
+      expect(response.code).to eq('200')
+    end  
+
+    it "subscriber is downgraded to role after subscription is deleted" do
+      expect(User.find(user_subscribed.id).role).to eq("user")
+    end
+  end
 end 
