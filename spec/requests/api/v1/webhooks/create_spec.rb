@@ -68,12 +68,12 @@ RSpec.describe 'POST /api/v1/webhooks', type: :request do
       post '/api/v1/webhooks', params: event, headers: headers, as: :json
     end
 
-    it "responds with 400 status code" do
-      expect(response.code).to eq('400')
+    it "responds with 200 status code" do
+      expect(response.code).to eq('200')
     end
 
     it "responds with error message" do
-      expect(response_json['message']).to eq("Payment Failed: charge.failed")
+      expect(response_json['message']).to eq("Webhook received - charge.failed")
     end
 
     it "session status is updated to paid" do
@@ -81,7 +81,6 @@ RSpec.describe 'POST /api/v1/webhooks', type: :request do
     end
 
     it "user role is updated to subscriber" do
-      binding.pry
       expect(User.find(stripe_session.user_id).role).to eq('user')
     end
   end

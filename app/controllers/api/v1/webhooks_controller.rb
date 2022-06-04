@@ -24,22 +24,15 @@ class Api::V1::WebhooksController < ApplicationController
     event_type = event['type']
     data_object = event.data['object']
   
-    if event.type.present?
-      if data_object['paid'] === true
-        session = StripeSession.find_by(session_id: data_object.id)
-        session.status = "paid"
-        session.save
+    if event.type.present? && data_object['paid'] === true
+      session = StripeSession.find_by(session_id: data_object.id)
+      session.status = "paid"
+      session.save
 
-        session.persisted? && session.user.role = "subscriber"
-        session.user.save
-        render json: session, status: 200
-        return
-      else
-        render json: { message: "Payment Failed: #{event_type}" }, status: 400
-        return
-      end
+      session.persisted? && session.user.role = "subscriber"
+      session.user.save
     end
 
-    render json: { message: "success" }, status: 200
+    render json: { message: "Webhook received - #{event_type}" }, status: 200
   end
 end
