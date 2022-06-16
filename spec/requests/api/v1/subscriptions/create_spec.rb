@@ -1,27 +1,12 @@
 require 'stripe_mock'
 
-RSpec.describe 'User can buy subscritption' do
+RSpec.describe 'User can buy subscription' do
   let(:stripe_helper) { StripeMock.create_test_helper }
     before(:each) { StripeMock.start }
     after(:each) { StripeMock.stop }
   let(:user) { create(:user, role: "user") }
   let(:user_credentials) { user.create_new_auth_token }
   let(:headers) { { HTTP_ACCEPT: 'application/json' }.merge!(user_credentials) }
-
-  describe "successfully" do
-    before do
-      post '/api/v1/subscriptions',
-      headers: headers
-    end
-
-    it 'recieve successful response' do
-      expect(response).to have_http_status 200
-    end
-
-    it 'creates customer from current user' do
-      expect(customer.email).to eq(user.email)
-    end
-  end
 
   describe 'when user is not signed in' do
     before do

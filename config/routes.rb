@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'webhooks/create'
   mount_devise_token_auth_for 'User', at: 'api/v1/auth', skip: [:omniauth_callbacks]
   namespace :api do
     namespace :v1, defaults: { format: :json } do
@@ -9,6 +8,7 @@ Rails.application.routes.draw do
       resources :excels, only: [:create, :index, :destroy, :update]
       resources :subscriptions, only: [:create]
       resources :webhooks, only: [:create]
+      resources :stripe_portals, only: [:create]
       namespace :admin, defaults: { format: :json } do
         resources :users, only: [:update, :show]
         resources :excels, only: [:index, :create, :update]

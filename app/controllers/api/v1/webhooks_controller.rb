@@ -24,13 +24,15 @@ class Api::V1::WebhooksController < ApplicationController
     event_type = event['type']
     data_object = event.data['object']
 
-    if event.type.present? && data_object['paid'] === true
-      session = StripeSession.find_by(session_id: data_object.id)
-      session.status = "paid"
-      session.save
+    if event.type === "invoice.paid" && data_object['paid'] === true
+      session = StripeSession.find_by(customer_id: data_object.customer)
+      if session != nil
+        session.status = "paid"
+        session.save
 
-      session.persisted? && session.user.role = 1
-      session.user.save
+        session.persisted? && session.user.role = 1
+        session.user.save
+      end
     end
 
     if event.type == 'customer.subscription.deleted' && data_object.status === "canceled"
