@@ -17,6 +17,6 @@ class Api::V1::StripePortalsController < ApplicationController
       return_url: return_url
     })
     
-    redirect_to session.url, status: 301
+    render json: session.url, status: 200
   end
 end
