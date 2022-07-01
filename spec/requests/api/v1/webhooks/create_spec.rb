@@ -126,7 +126,7 @@ RSpec.describe 'POST /api/v1/webhooks', type: :request do
       expect(response.code).to eq('200')
     end  
 
-    it "subscriber is downgraded to role after subscription is deleted" do
+    it "subscriber is downgraded to user role after subscription is deleted" do
       expect(User.find(user_subscribed.id).role).to eq("user")
     end
   end

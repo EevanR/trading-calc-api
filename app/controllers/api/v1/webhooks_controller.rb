@@ -23,8 +23,8 @@ class Api::V1::WebhooksController < ApplicationController
     end
     event_type = event['type']
     data_object = event.data['object']
-
-    if event.type === "invoice.paid" && data_object['paid'] === true
+    
+    if event.type === "invoice.payment_succeeded" && data_object['paid'] === true
       session = StripeSession.find_by(customer_id: data_object.customer)
       if session != nil
         session.status = "paid"
