@@ -9,4 +9,5 @@ class User < ActiveRecord::Base
 
   enum role: {  user: 0, subscriber: 1 }
 
+  has_many :stripe_sessions, dependent: :destroy
 end
