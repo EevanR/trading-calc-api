@@ -3,7 +3,7 @@
 module StripeTestHelper
   def stripe_event_signature(payload)
     time = Time.now
-    secret = Rails.application.credentials.stripe[:webhook_secret]
+    secret = Rails.application.credentials[:stripe_webhook_secret]
     signature = Stripe::Webhook::Signature.compute_signature(time, payload, secret)
     Stripe::Webhook::Signature.generate_header(
       time,

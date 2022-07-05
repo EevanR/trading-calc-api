@@ -1,7 +1,7 @@
 class Api::V1::WebhooksController < ApplicationController
 
   def create
-    webhook_secret = Rails.application.credentials.stripe[:webhook_secret]
+    webhook_secret = Rails.application.credentials[:stripe_webhook_secret]
     payload = request.body.read
     
     if !webhook_secret.blank? && !webhook_secret.nil?
