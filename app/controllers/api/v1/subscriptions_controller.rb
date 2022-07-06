@@ -2,7 +2,7 @@ class Api::V1::SubscriptionsController < ApplicationController
   before_action :authenticate_user!
   
   def create
-    Stripe.api_key = Rails.application.credentials.stripe_secret_key
+    Stripe.api_key = "sk_test_51Ky6crB3yNNgOUzgPjlEhKuD2qr00RstcGAC0nmXWXw5ll8BWp1kRHqqL36O6Ajo5ZPWKSuU4AwW2rR4aS3h87VP00x4vXZqe4"
 
     customer = Stripe::Customer.create(
       email: current_user.email,
