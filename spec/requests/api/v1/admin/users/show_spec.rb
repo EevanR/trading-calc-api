@@ -19,10 +19,23 @@ RSpec.describe 'GET /api/v1/admin/users/:id', type: :request do
     end
   end
 
-  describe 'find user by session_id' do
+  describe 'unable to find user without headers' do
     before do
-      get "/api/v1/admin/users/ses=#{stripe_session.session_id}",
-      headers: headers
+      get "/api/v1/admin/users/#{user.id}"
+    end
+    
+    it 'returns a 401 response status' do
+      expect(response).to have_http_status 401
+    end
+
+    it "returns unauthorized message" do
+      expect(response_json['error']).to eq "Must log in to view user data"
+    end
+  end
+
+  describe 'find user by session_id without authentication' do
+    before do
+      get "/api/v1/admin/users/ses=#{stripe_session.session_id}"
     end
     
     it 'returns a 200 response status' do
