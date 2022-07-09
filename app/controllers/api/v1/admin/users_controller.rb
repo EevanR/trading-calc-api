@@ -12,8 +12,14 @@ class Api::V1::Admin::UsersController < ApplicationController
   end
 
   def show
-    user = User.find(params[:id])
-    render json: user
+    if params[:id].slice(0,3) === "ses"
+      session = params[:id].slice(4,params[:id].length)     
+      user = StripeSession.find_by(session_id: session).user
+      render json: user
+    else
+      user = User.find(params[:id])
+      render json: user
+    end
   end
 
   private
