@@ -1,5 +1,5 @@
 class Api::V1::Admin::UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:show]
 
   def update
     user = User.find(params[:id])
@@ -12,8 +12,18 @@ class Api::V1::Admin::UsersController < ApplicationController
   end
 
   def show
-    user = User.find(params[:id])
-    render json: user
+    if params[:id].slice(0,3) === "ses"
+      session = params[:id].slice(4, params[:id].length)     
+      user = StripeSession.find_by(session_id: session).user
+      render json: user
+    else
+      user = User.find(params[:id])
+      if current_user.present? 
+        current_user.id === user.id ? (render json: user) : (render json: { error: "Not Authorized" }, status: 401)
+      else
+        render json: { error: "Must log in to view user data" }, status: 401
+      end
+    end
   end
 
   private

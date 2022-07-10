@@ -21,7 +21,7 @@ class Api::V1::SubscriptionsController < ApplicationController
         price: prices.data[0].id
       }],
       success_url: 'https://www.trade-logs.com/receipt' + '?success=true&session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: 'https://www.trade-logs.com/receipt' + '?canceled=true',
+      cancel_url: 'http://localhost:3001/receipt' + '?canceled=true&session_id={CHECKOUT_SESSION_ID}',
     })
     user = current_user
     user.customer_id = session.customer
