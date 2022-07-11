@@ -2,7 +2,7 @@ class Api::V1::StripePortalsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    return_url = 'http://wwww.trade-logs.com/panes'
+    return_url = 'http://www.trade-logs.com/panes'
 
     if params['session_id']
       session = StripeSession.find_by(session_id: params['session_id'])
