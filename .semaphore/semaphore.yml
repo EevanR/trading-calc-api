@@ -13,7 +13,7 @@ blocks:
         - name: RAILS_ENV
           value: test
       jobs:
-        - name: Bundle
+        - name: Tests
           commands:
             - sem-version ruby 2.5.1
             - sem-version node 10
@@ -23,6 +23,5 @@ blocks:
             - bundle install --path vendor/bundle
             - sem-service start postgres 13
             - bundle exec rails db:setup --all db:migrate
-            - bundle exec rails db:test:prepare --exclude-pattern "spec/requests/api/v1/webhooks/**/*_spec.rb"
             - COVERALLS_REPO_TOKEN=kSwPXbY4K88MkrdTibj9BFdk9I3k9lehb bundle exec rails ci:tests
             - cache store
