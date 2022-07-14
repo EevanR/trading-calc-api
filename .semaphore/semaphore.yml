@@ -8,25 +8,34 @@ blocks:
   - name: Setup
     task:
       jobs:
-        - name: Bundle
+        - name: Test
           commands:
-            - sem-version ruby 2.5.1
-            - sem-version node 10
             - checkout
-            - cache restore
-            - gem update --system
-            - bundle install
-            - cache store
-  - name: Integration tests
-    task:
-      prologue:
-        commands:
-          - sem-version ruby 2.5.1
-          - sem-version node 10
-          - checkout
-      jobs:
-        - name: Rspec - feature specs
-          commands:
             - sem-service start postgres
-            - bundle exec rake db:setup --all db:migrate
+            - sem-version ruby 2.5.1
+            - bundle install
+            - bundle exec rails db:setup --all db:migrate
             - bundle exec rspec spec
+  #     jobs:
+  #       - name: Bundle
+  #         commands:
+  #           - sem-version ruby 2.5.1
+  #           - sem-version node 10
+  #           - checkout
+  #           - cache restore
+  #           - gem update --system
+  #           - bundle install
+  #           - cache store
+  # - name: Integration tests
+  #   task:
+  #     prologue:
+  #       commands:
+  #         - sem-version ruby 2.5.1
+  #         - sem-version node 10
+  #         - checkout
+  #     jobs:
+  #       - name: Rspec - feature specs
+  #         commands:
+  #           - sem-service start postgres
+  #           - bundle exec rake db:setup --all db:migrate
+  #           - bundle exec rspec spec
