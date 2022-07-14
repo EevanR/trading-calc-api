@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+require 'simplecov'
+SimpleCov.start 'rails'
 
 module StripeTestHelper
   def stripe_event_signature(payload)
