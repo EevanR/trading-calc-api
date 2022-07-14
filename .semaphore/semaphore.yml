@@ -1,0 +1,27 @@
+version: v1.0
+name: Trade-logs
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+blocks:
+  - name: Setup
+    task:
+      env_vars:
+        - name: DATABASE_URL
+          value: 'postgresql://postgres:@0.0.0.0:5432/trading_calc'
+        - name: RAILS_ENV
+          value: test
+      jobs:
+        - name: Tests
+          commands:
+            - sem-version ruby 2.5.1
+            - sem-version node 10
+            - checkout
+            - cache restore
+            - gem update --system
+            - bundle install --path vendor/bundle
+            - sem-service start postgres 13
+            - bundle exec rails db:setup --all db:migrate
+            - COVERALLS_REPO_TOKEN=629AUcqBIKPQOJ2OXx9vTmZKj16KrGFJ7 bundle exec rspec spec --exclude-pattern "spec/requests/api/v1/webhooks/**/*_spec.rb"
+            - cache store
