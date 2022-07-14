@@ -14,7 +14,7 @@ blocks:
             - sem-version node 10
             - checkout
             - cache restore
-            - bundle install
+            - 'bundle install'
             - cache store
   - name: Integration tests
     task:
