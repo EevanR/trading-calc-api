@@ -1,15 +1,14 @@
 version: v1.0
-name: Trading Calc
+name: Initial Pipeline
 agent:
   machine:
     type: e1-standard-2
-    os_image: ubuntu1804
+    os_image: ubuntu2004
 blocks:
   - name: Setup
-    dependencies: []
     task:
       jobs:
-        - name: bundle
+        - name: Bundle
           commands:
             - sem-version ruby 2.5.1
             - sem-version node 10.16.3
@@ -18,19 +17,17 @@ blocks:
             - bundle install
             - cache store
   - name: Integration tests
-    dependencies:
-      - Unit tests
     task:
       prologue:
         commands:
-          - sem-version ruby 2.5.1
+          - sem version 2.5.1
           - sem-version node 10.16.3
           - checkout
           - cache restore
           - bundle install
           - cache store
       jobs:
-        - name: RSpec - feature specs
+        - name: Rspec - feature specs
           commands:
             - sem-service start postgres
             - 'bundle exec rake db:setup'
