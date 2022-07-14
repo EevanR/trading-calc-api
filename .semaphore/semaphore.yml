@@ -12,6 +12,8 @@ blocks:
           value: 'postgresql://postgres:@0.0.0.0:5432/trading_calc'
         - name: RAILS_ENV
           value: test
+      secrets:
+        - name: webhook_test
       jobs:
         - name: Bundle
           commands:
@@ -23,5 +25,5 @@ blocks:
             - bundle install --path vendor/bundle
             - sem-service start postgres 13
             - bundle exec rails db:setup --all db:migrate
-            - bundle exec rspec spec --exclude-pattern "spec/requests/api/v1/webhooks/**/*_spec.rb"
+            - bundle exec rspec spec
             - cache store
