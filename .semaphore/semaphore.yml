@@ -1,0 +1,37 @@
+version: v1.0
+name: Trading Calc
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Setup
+    dependencies: []
+    task:
+      jobs:
+        - name: bundle
+          commands:
+            - sem-version ruby 2.5.1
+            - sem-version node 10.16.3
+            - checkout
+            - cache restore
+            - bundle install
+            - cache store
+  - name: Integration tests
+    dependencies:
+      - Unit tests
+    task:
+      prologue:
+        commands:
+          - sem-version ruby 2.5.1
+          - sem-version node 10.16.3
+          - checkout
+          - cache restore
+          - bundle install
+          - cache store
+      jobs:
+        - name: RSpec - feature specs
+          commands:
+            - sem-service start postgres
+            - 'bundle exec rake db:setup'
+            - bundle exec rspec spec/features
