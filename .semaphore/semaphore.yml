@@ -23,5 +23,5 @@ blocks:
             - bundle install --path vendor/bundle
             - sem-service start postgres 13
             - bundle exec rails db:setup --all db:migrate
-            - bundle exec rspec spec --exclude-pattern "spec/{foldername1,foldername2}/**/*_spec.rb"
+            - bundle exec rspec spec --exclude-pattern "spec/requests/api/v1/webhooks/**/*_spec.rb"
             - cache store
