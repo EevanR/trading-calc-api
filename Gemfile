@@ -22,7 +22,6 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'coveralls', require: false
   gem 'stripe-ruby-mock', require: 'stripe_mock'
-  gem 'simplecov', require: false, group: :test
 end
 
 group :development do
