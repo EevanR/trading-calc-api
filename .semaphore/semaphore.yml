@@ -23,5 +23,6 @@ blocks:
             - bundle install --path vendor/bundle
             - sem-service start postgres 13
             - bundle exec rails db:setup --all db:migrate
-            - bundle exec rails db:test:prepare
+            # - bundle exec rails db:test:prepare
+            - bundle exec rspec spec
             - cache store
