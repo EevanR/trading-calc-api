@@ -11,7 +11,7 @@ blocks:
         - name: Bundle
           commands:
             - sem-version ruby 2.5.1
-            - sem-version node 10.16.3
+            - sem-version node 10
             - checkout
             - cache restore
             - gem update --system
@@ -21,12 +21,11 @@ blocks:
     task:
       prologue:
         commands:
-          - sem-version ruby 2.5.1
-          - sem-version node 10.16.3
           - checkout
+          - cache restore
       jobs:
         - name: Rspec - feature specs
           commands:
             - sem-service start postgres
-            - 'bundle exec rake db:setup'
+            - bundle exec rake db:setup
             - bundle exec rspec spec/features
