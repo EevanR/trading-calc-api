@@ -6,7 +6,7 @@ ruby '2.5.1'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
-gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bootsnap', '>= 1.1.0', '< 1.4.2', require: false
 gem 'rack-cors', require: 'rack/cors'
 gem 'devise_token_auth'
 gem 'rest-client'
