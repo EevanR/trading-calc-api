@@ -1,10 +1,12 @@
 require 'simplecov'
+require 'coveralls'
+Coveralls.wear_merged!('rails')
+
 SimpleCov.formatter = Coveralls::SimpleCov::Formatter
 SimpleCov.start 'rails' do
   add_filter 'app/secrets'
 end
-require 'coveralls'
-Coveralls.wear_merged!('rails')
+
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -15,7 +17,6 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-  
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
 end
