@@ -1,9 +1,5 @@
-require 'simplecov'
 require 'coveralls'
 Coveralls.wear_merged!('rails')
-
-SimpleCov.formatter = Coveralls::SimpleCov::Formatter
-SimpleCov.start
 
 
 ENV['RAILS_ENV'] ||= 'test'
