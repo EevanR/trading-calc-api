@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start 'rails'
+Rails.application.eager_load!
 require 'coveralls'
 Coveralls.wear_merged!('rails')
 
