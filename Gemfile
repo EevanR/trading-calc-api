@@ -21,6 +21,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'factory_bot_rails'
+  gem 'stripe-ruby-mock', require: 'stripe_mock'
 end
 
 group :development do
