@@ -1,7 +1,4 @@
 # frozen_string_literal: true
-require 'simplecov'
-SimpleCov.start 'rails'
-Rails.application.eager_load!
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
