@@ -13,6 +13,8 @@ gem 'rest-client'
 gem "pundit", "~> 2.2"
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'stripe-rails'
+gem 'coveralls', require: false
+gem 'simplecov', require: false, group: :test
 
 group :development, :test do
   gem 'pry-rails'
@@ -20,9 +22,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'factory_bot_rails'
-  gem 'coveralls', require: false
   gem 'stripe-ruby-mock', require: 'stripe_mock'
-  gem 'simplecov', require: false, group: :test
 end
 
 group :development do
