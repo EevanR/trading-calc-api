@@ -1,7 +1,4 @@
-require 'simplecov'
-SimpleCov.start 'rails'
-# Rails.application.eager_load!
-require 'coveralls'
+require  'coveralls'
 Coveralls.wear_merged!('rails')
 
 ENV['RAILS_ENV'] ||= 'test'
