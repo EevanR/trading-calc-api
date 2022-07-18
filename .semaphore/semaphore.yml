@@ -13,7 +13,7 @@ blocks:
         - name: RAILS_ENV
           value: test
         - name: stripe_webhook_secret
-          value: '"whsec_5q5HfgFpL6Xmsl4yEke9NFLMy6twRTlB"'
+          value: 'whsec_5q5HfgFpL6Xmsl4yEke9NFLMy6twRTlB'
       jobs:
         - name: Tests
           commands:
