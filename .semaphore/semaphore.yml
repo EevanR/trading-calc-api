@@ -13,7 +13,7 @@ blocks:
         - name: RAILS_ENV
           value: test
         - name: stripe_webhook_secret
-          value: 'whsec_5q5HfgFpL6Xmsl4yEke9NFLMy6twRTlB'
+          value: whsec_5q5HfgFpL6Xmsl4yEke9NFLMy6twRTlB
       jobs:
         - name: Tests
           commands:
@@ -27,3 +27,5 @@ blocks:
             - 'bundle exec rails db:setup --all db:migrate'
             - 'COVERALLS_REPO_TOKEN=629AUcqBIKPQOJ2OXx9vTmZKj16KrGFJ7 bundle exec rails ci:tests'
             - cache store
+      secrets:
+        - name: STRIPE_WEBHOOK_SECRET
