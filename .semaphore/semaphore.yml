@@ -28,4 +28,5 @@ blocks:
             - 'COVERALLS_REPO_TOKEN=629AUcqBIKPQOJ2OXx9vTmZKj16KrGFJ7 bundle exec rails ci:tests'
             - cache store
       secrets:
+        - name: RAILS_MASTER_KEY
         - name: STRIPE_WEBHOOK_SECRET
