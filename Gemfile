@@ -13,7 +13,7 @@ gem 'rest-client'
 gem "pundit", "~> 2.2"
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'stripe-rails'
-gem 'coveralls_reborn', '~> 0.24.0'
+gem 'coveralls_reborn', '~> 0.24.0', require: false
 
 group :development, :test do
   gem 'pry-rails'
