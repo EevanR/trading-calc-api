@@ -14,9 +14,9 @@ RSpec.describe 'POST /api/v1/excels', type: :request do
       params: {
         excel: {
           data: [
-            {Ticker: "AMC", NetProfit: 234234},
+            {Ticker: "AMC", NetProfit: 234234, GrossProfit: 25.80, SharesTraded: 100, Side: "SS"},
             {Ticker: "FB", NetProfit: 23.00},
-            {Ticker: "AMZN", NetProfit: 234234},
+            {Ticker: "AMZN", NetProfit: 234234, GrossProfit: 25.80, SharesTraded: 100, Side: "SS"},
             {Ticker: "AAPL", NetProfit: 23.00},
             {Ticker: "MSFT", NetProfit: 234234},
             {Ticker: "YTEN", NetProfit: 23.00},
