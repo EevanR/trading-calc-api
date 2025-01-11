@@ -9,7 +9,7 @@ FactoryBot.define do
           :GrossProfit=>25.80,
           :ShareCount=> 0,
           :Commissions=>2.36,
-          :Shares=>100,
+          :SharesTraded=>100,
           :Side=>"SS"
         }, 
         {
@@ -18,7 +18,7 @@ FactoryBot.define do
           :GrossProfit=>26.80,
           :ShareCount=> 0,
           :Commissions=>3.8,
-          :Shares=>100,
+          :SharesTraded=>100,
           :Side=>"SS"
         },
         {
@@ -27,7 +27,7 @@ FactoryBot.define do
           :GrossProfit=>25.80,
           :ShareCount=> 0,
           :Commissions=>2.36,
-          :Shares=>100,
+          :SharesTraded=>100,
           :Side=>"SS"
         }, 
         {
@@ -36,7 +36,7 @@ FactoryBot.define do
           :GrossProfit=>26.80,
           :ShareCount=> 0,
           :Commissions=>3.8,
-          :Shares=>100,
+          :SharesTraded=>100,
           :Side=>"SS"
         },
         {
@@ -45,7 +45,7 @@ FactoryBot.define do
           :GrossProfit=>25.80,
           :ShareCount=> 0,
           :Commissions=>2.36,
-          :Shares=>100,
+          :SharesTraded=>100,
           :Side=>"SS"
         }, 
         {
@@ -54,7 +54,7 @@ FactoryBot.define do
           :GrossProfit=>26.80,
           :ShareCount=> 0,
           :Commissions=>3.8,
-          :Shares=>100,
+          :SharesTraded=>100,
           :Side=>"SS"
         },{
           :Ticker=>"DRYS", 
@@ -62,7 +62,7 @@ FactoryBot.define do
           :GrossProfit=>25.80,
           :ShareCount=> 0,
           :Commissions=>2.36,
-          :Shares=>100,
+          :SharesTraded=>100,
           :Side=>"SS"
         }, 
         {
@@ -71,7 +71,7 @@ FactoryBot.define do
           :GrossProfit=>26.80,
           :ShareCount=> 0,
           :Commissions=>3.8,
-          :Shares=>100,
+          :SharesTraded=>100,
           :Side=>"SS"
         },
         {
@@ -80,7 +80,7 @@ FactoryBot.define do
           :GrossProfit=>25.80,
           :ShareCount=> 0,
           :Commissions=>2.36,
-          :Shares=>100,
+          :SharesTraded=>100,
           :Side=>"SS"
         }, 
         {
@@ -89,7 +89,7 @@ FactoryBot.define do
           :GrossProfit=>26.80,
           :ShareCount=> 0,
           :Commissions=>3.8,
-          :Shares=>100,
+          :SharesTraded=>100,
           :Side=>"SS"
         },
         {
@@ -98,7 +98,7 @@ FactoryBot.define do
           :GrossProfit=>25.80,
           :ShareCount=> 0,
           :Commissions=>2.36,
-          :Shares=>100,
+          :SharesTraded=>100,
           :Side=>"SS"
         }, 
         {
@@ -107,7 +107,7 @@ FactoryBot.define do
           :GrossProfit=>26.80,
           :ShareCount=> 0,
           :Commissions=>3.8,
-          :Shares=>100,
+          :SharesTraded=>100,
           :Side=>"SS"
         }
       ] 

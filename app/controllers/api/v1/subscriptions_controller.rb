@@ -2,7 +2,6 @@ class Api::V1::SubscriptionsController < ApplicationController
   before_action :authenticate_user!
   
   def create
-    binding.pry
     Stripe.api_key = Rails.application.credentials.stripe_secret_key
 
     customer = Stripe::Customer.create(

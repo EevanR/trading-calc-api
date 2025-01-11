@@ -14,9 +14,9 @@ RSpec.describe 'POST /api/v1/excels', type: :request do
       params: {
         excel: {
           data: [
-            {Ticker: "AMC", NetProfit: 234234, GrossProfit: 25.80, Shares: 100, Side: "SS"},
+            {Ticker: "AMC", NetProfit: 234234, GrossProfit: 25.80, SharesTraded: 100, Side: "SS"},
             {Ticker: "FB", NetProfit: 23.00},
-            {Ticker: "AMZN", NetProfit: 234234, GrossProfit: 25.80, Shares: 100, Side: "SS"},
+            {Ticker: "AMZN", NetProfit: 234234, GrossProfit: 25.80, SharesTraded: 100, Side: "SS"},
             {Ticker: "AAPL", NetProfit: 23.00},
             {Ticker: "MSFT", NetProfit: 234234},
             {Ticker: "YTEN", NetProfit: 23.00},
@@ -37,7 +37,6 @@ RSpec.describe 'POST /api/v1/excels', type: :request do
     end
 
     it 'returns value from Data array' do
-      binding.pry
       expect(response_json['excel']["data"][0]["Ticker"]).to eq "AMZN"
       expect(response_json['excel']["data"][1]["NetProfit"]).to eq "23.0"
     end
